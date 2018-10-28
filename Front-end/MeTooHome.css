@@ -51,3 +51,45 @@ li a:hover {
     margin-top: -15px;
     margin-bottom: -15px;
 }
+
+
+
+.button {
+    background-color: #1DB2E1;
+    border: none;
+    color: white;
+    height: 50px;
+    width: 250px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 30px;
+    margin: 3px 2px;
+    cursor: pointer;
+    border-radius: 50px;
+}
+
+.button span {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.6s;
+}
+
+.button span:after {
+  content: '\00bb';
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: -20px;
+  transition: 0.5s;
+}
+
+.button:hover span {
+  padding-right: 30px;
+}
+
+.button:hover span:after {
+  opacity: 1;
+  right: 0;
+}
