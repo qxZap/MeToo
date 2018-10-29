@@ -117,12 +117,12 @@ li a:hover {
 
 @font-face {
    font-family: myFirstFont;
-   src: url(Convergence-Regular.ttf);
+   src: url(assets/fonts/Convergence-Regular.ttf);
 }
 
 @font-face {
    font-family: myFirstFont;
-   src: url(Convergence-Regular.ttf);
+   src: url(assets/fonts/Convergence-Regular.ttf);
    font-weight: bold;
 }
 
