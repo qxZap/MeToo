@@ -53,6 +53,18 @@ li a:hover {
 }
 
 
+.divSpace{
+    padding-top:5%;
+}
+
+.font {
+    text-align: center;
+    text-decoration: none;
+    display: inline;
+    font-size: 30px;
+    padding-left: 40%;
+}
+
 
 .button {
     background-color: #1DB2E1;
@@ -99,7 +111,7 @@ li a:hover {
     margin: auto;
     position: absolute;
     top: 50%;
-    left: 45%;
+    left: 40%;
     padding: 0px;
 }
 
