@@ -62,7 +62,7 @@ li a:hover {
     text-decoration: none;
     display: inline;
     font-size: 30px;
-    padding-left: 40%;
+    padding-left: 38%;
 }
 
 
@@ -112,7 +112,6 @@ li a:hover {
     position: absolute;
     top: 50%;
     left: 40%;
-    padding: 0px;
 }
 
 @font-face {
@@ -130,5 +129,11 @@ div {
     font-family: myFirstFont;
 }
 
-
-
+.description{
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    padding-left: 20%;
+    overflow: hidden;
+    padding-right:20%;
+}
