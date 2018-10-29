@@ -93,3 +93,30 @@ li a:hover {
   opacity: 1;
   right: 0;
 }
+
+
+.center {
+    margin: auto;
+    position: absolute;
+    top: 50%;
+    left: 45%;
+    padding: 0px;
+}
+
+@font-face {
+   font-family: myFirstFont;
+   src: url(Convergence-Regular.ttf);
+}
+
+@font-face {
+   font-family: myFirstFont;
+   src: url(Convergence-Regular.ttf);
+   font-weight: bold;
+}
+
+div {
+    font-family: myFirstFont;
+}
+
+
+
