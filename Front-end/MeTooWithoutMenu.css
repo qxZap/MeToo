@@ -1,0 +1,23 @@
+.bgGradient {
+    background-size: cover;
+    width: 100%;
+    height: 100%;
+    padding: 0%;
+    align-content: center;
+    align-items: center;
+    margin:0;
+    background: rgba(255,211,181,1);
+background: -moz-linear-gradient(left, rgb(228, 146, 92) 0%, rgb(241, 184, 137) 37%, rgb(247, 193, 140) 65%, rgba(255,191,148,1) 85%, rgba(255,211,181,1) 100%);
+background: -webkit-gradient(left top, right top, color-stop(0%, rgb(228, 146, 92)), color-stop(37%, rgb(241, 184, 137)), color-stop(65%, rgb(247, 193, 140)), color-stop(85%, rgba(255,191,148,1)), color-stop(100%, rgba(255,211,181,1)));
+background: -webkit-linear-gradient(left, rgb(228, 146, 92) 0%, rgb(241, 184, 137) 37%, rgb(247, 193, 140) 65%, rgba(255,191,148,1) 85%, rgba(255,211,181,1) 100%);
+background: -o-linear-gradient(left, rgb(228, 146, 92) 0%, rgb(241, 184, 137) 37%, rgb(247, 193, 140) 65%, rgba(255,191,148,1) 85%, rgba(255,211,181,1) 100%);
+background: -ms-linear-gradient(left, rgb(228, 146, 92) 0%, rgb(241, 184, 137) 37%, rgb(247, 193, 140) 65%, rgba(255,191,148,1) 85%, rgba(255,211,181,1) 100%);
+background: linear-gradient(to right, rgb(228, 146, 92) 0%, rgb(241, 184, 137) 37%, rgb(247, 193, 140) 65%, rgba(255,191,148,1) 85%, rgba(255,211,181,1) 100%);
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#dc874e', endColorstr='#ffd3b5', GradientType=1 );}
+
+.imag {
+    height:7vw;
+    width:12vw;
+    margin-top: -15px;
+    margin-bottom: -15px;
+}
