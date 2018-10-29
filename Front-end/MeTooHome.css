@@ -46,23 +46,23 @@ li a:hover {
 }
 
 .imag {
-    height:90px;
-    width:155px;
+    height:7vw;
+    width:13vw;
     margin-top: -15px;
     margin-bottom: -15px;
 }
 
 
 .divSpace{
-    padding-top:5%;
+    padding-top:2vw;
 }
 
 .font {
     text-align: center;
     text-decoration: none;
     display: inline;
-    font-size: 30px;
-    padding-left: 38%;
+    font-size:2.5vw;
+    padding-left: 37.5vw;
 }
 
 
@@ -70,13 +70,13 @@ li a:hover {
     background-color: #1DB2E1;
     border: none;
     color: white;
-    height: 50px;
-    width: 250px;
+    height: 4.5vw;
+    width: 18vw;
     text-align: center;
     text-decoration: none;
     display: inline-block;
-    font-size: 30px;
-    margin: 3px 2px;
+    font-size: 3.3vw;
+    margin: 0.37vw 0.3vw;
     cursor: pointer;
     border-radius: 50px;
 }
@@ -108,25 +108,18 @@ li a:hover {
 
 
 .center {
-    margin: auto;
-    position: absolute;
-    top: 50%;
-    left: 40%;
+    padding-top:2vw;
+    top: 50vw;
+    padding-left: 40vw;
 }
 
 @font-face {
-   font-family: myFirstFont;
+    font-family: 'Lora', serif;
    src: url(assets/fonts/Convergence-Regular.ttf);
-}
-
-@font-face {
-   font-family: myFirstFont;
-   src: url(assets/fonts/Convergence-Regular.ttf);
-   font-weight: bold;
 }
 
 div {
-    font-family: myFirstFont;
+    font-family: 'Lora', serif;
 }
 
 .description{
