@@ -1,55 +1,53 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <link rel="icon" href="assets/icon.png">    
-        <link rel="stylesheet" type="text/css" href="style.css">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>MeToo</title>
-            
-    </head>
-    <body class="bgGradient">
-        <img class="imag" src="assets/logo.png">    
-    </body>
-    
-    <div class="RegContainer">
-  <form action="/action_page.php">
-  
-    <label for="uname">Login Name</label><br>
-    <input type="text" id="fname" name="uname" placeholder="Your login name.."><br>
-  
-    <label for="passwd">Your Password</label><br>
-    <input type="password" id="fname" name="passwd" placeholder="Your password.."><br>
-  
-    <label for="rpasswd">Repeat Password</label><br>
-    <input type="password" id="fname" name="rpasswd" placeholder="Your password, again.."><br>
-  
-    <label for="fname">First Name</label><br>
-    <input type="text" id="fname" name="firstname" placeholder="Your name.."><br>
+<head>
+    <link rel="icon" href="assets/icon.png">
+    <link rel="stylesheet" type="text/css" href="Register.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MeToo</title>
 
-    <label for="lname">Last Name</label><br>
-    <input type="text" id="lname" name="lastname" placeholder="Your last name.."><br>
-    
-    <label for="gender">Gender</label><br>
-    <label><input type="radio" checked="checked" value="male" name="gender"> Male<br></label>
-    <label><input type="radio" value="female" name="gender"> Female<br></label>
-    
-    <label for="bday">Date Of Birth</label><br>
-	<input type="date" name="bday"><br>
+</head>
+<body class="bgGradient">
+<img class="imag" src="assets/logo.png">
 
-    <label for="email">Email adress</label><br>
-    <input type="text" id="lname" name="email" placeholder="Your e-mail adress.."><br>
 
-    <label for="country">Country</label><br>
-    <select id="country" name="country">
-      <option value="romania">Romania</option>
-      <option value="australia">Australia</option>
-      <option value="canada">Canada</option>
-      <option value="usa">USA</option>
-    </select><br>
+<form action="/action_page.php" method="post">
 
-    <input type="submit" value="Submit">
-  </form>
-</div>
-    
+    <h1>Sign Up</h1>
+    <!-- fieldset tag is used to group related elements in a form.-->
+    <fieldset>
+
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="user_name">
+
+        <label for="mail">Email:</label>
+        <input type="email" id="mail" name="user_email">
+
+        <label for="date">Date Of Birth:</label>
+        <input type="date" id="date" name="user_date">
+
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="user_password">
+
+        <label for="password">Retype Password:</label>
+        <input type="password" id="password2" name="user_password">
+    </fieldset>
+    <fieldset>
+        <label for="country">Country:</label>
+        <select id="country" name="user_country">
+                <option value="belgia">Belgia</option>
+                <option value="croatia">Croatia</option>
+                <option value="danemarca"> Danemarca</option>
+                <option value="franta">Franta</option>
+                <option value="romania">Romania</option>
+                <option value="algeria">Algeria</option>
+                <option value="australia">Australia</option>
+                <option value="capeverde">Cape verde</option>
+        </select>
+    </fieldset>
+    <button type="submit">Sign Up</button>
+</form>
+
+</body>
 
 </html>

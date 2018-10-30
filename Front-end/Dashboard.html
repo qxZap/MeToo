@@ -2,65 +2,125 @@
 <html>
     <head>
         <link rel="icon" href="assets/icon.png">    
-        <link rel="stylesheet" type="text/css" href="style.css">
+        <link rel="stylesheet" type="text/css" href="Dashboard.css">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>MeToo</title>
-            
+        <title>MeToo</title> 
     </head>
     <body class="bgGradient">
-        <img class="imag" src="assets/logo.png">    
+        
+      <div class="logoSearch">
+      <img class="imag" src="assets/logo.png">   
+          <input type="text" class="search" name="search" placeholder="Search..">
+
+      </div>
+
+      
+
+        
+        <div class="sidebar">
+          <a class="active" href="#browse">Browse</a>
+          <a href="#youip">Local</a>
+          <a href="#yourrooms">Your Rooms</a>
+          <a href="#about">About</a>
+        </div>
+        
+        <table class="projects">
+          <tr>
+            <th>Project Name</th>
+            <th>Location</th>
+            <th>Room ocupation</th>
+            <th>Owner</th>
+          </tr>
+          <tr onclick='window.open("http://www.google.com")'>
+            <td>C++ Board Game</td>
+            <td><img class="location" src="assets/location.png">  Mama Mia</td>
+            <td>2/3</td>
+            <td>Radozaur</td>
+          </tr>
+          <tr>
+            <td>Python API</td>
+            <td><img class="location" src="assets/location.png"> FII</td>
+            <td>1/2</td>
+            <td>Garbiela</td>
+          </tr>
+          <tr>
+            <td>Java text recognition</td>
+            <td><img class="location" src="assets/location.png"> Food Court</td>
+            <td>2/3</td>
+            <td>Zapzilla</td>
+          </tr>
+          <tr>
+            <td>Pen Testing</td>
+            <td><img class="location" src="assets/location.png"> Mama Mia</td>
+            <td>1/3</td>
+            <td>Flo.Salam</td>
+        </tr>
+          <tr>
+            <td>ALK homeworks</td>
+            <td><img class="location" src="assets/location.png"> FII C902</td>
+            <td>1/2</td>
+            <td>Rozovan</td>
+        </tr>
+        </table>
+
+<!--dropdown menu-->
+
+<div class="dropdown">
+    <a href="#" class="account" >
+    <img src="assets/gabiPoza.png" class="profile-circle"/>
+    </a>
+    <div class="submenu">
+    <ul class="root">
+    <li >
+    <a href="#" >Dashboard</a>
+    </li>
+    <li >
+    <a href="#" >Profile</a>
+    </li>
+    <li >
+    <a href="#">Settings</a>
+    </li>
+    <li>
+    <a href="#">Sign Out</a>
+    </li>
+    </ul>
+    </div>
+    </div>
+
+
+    <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+  <script>
+$(document).ready(function(){
+$(".account").click(function()
+{
+var X=$(this).attr('id');
+if(X==1)
+{
+$(".submenu").hide();
+$(this).attr('id', '0'); 
+}
+else
+{
+$(".submenu").show();
+$(this).attr('id', '1');
+}
+});
+$(".submenu").mouseup(function()
+{
+return false
+});
+$(".account").mouseup(function()
+{
+return false
+});
+$(document).mouseup(function()
+{
+$(".submenu").hide();
+$(".account").attr('id', '');
+});
+});
+  </script>
+
+
     </body>
-    
-    
-<form>
-  <input type="text" class="search" name="search" placeholder="Search..">
-</form>
-
-<div class="sidebar">
-  <a class="active" href="#browse">Browse</a>
-  <a href="#youip">Local</a>
-  <a href="#yourrooms">Your Rooms</a>
-  <a href="#about">About</a>
-</div>
-
-<table>
-  <tr>
-    <th>Project Name</th>
-    <th>Location</th>
-    <th>Room ocupation</th>
-    <th>Owner</th>
-  </tr>
-  <tr onclick='window.open("http://www.google.com")'>
-    <td>C++ Board Game</td>
-    <td><img class="location" src="assets/location.png">  Mama Mia</td>
-    <td>2/3</td>
-    <td>Radozaur</td>
-  </tr>
-  <tr>
-    <td>Python API</td>
-    <td><img class="location" src="assets/location.png"> FII</td>
-    <td>1/2</td>
-    <td>Garbiela</td>
-  </tr>
-  <tr>
-    <td>Java text recognition</td>
-    <td><img class="location" src="assets/location.png"> Food Court</td>
-    <td>2/3</td>
-    <td>Zapzilla</td>
-  </tr>
-  <tr>
-    <td>Pen Testing</td>
-    <td><img class="location" src="assets/location.png"> Mama Mia</td>
-    <td>1/3</td>
-    <td>Flo.Salam</td>
-</tr>
-  <tr>
-    <td>ALK homeworks</td>
-    <td><img class="location" src="assets/location.png"> FII C902</td>
-    <td>1/2</td>
-    <td>Rozovan</td>
-</tr>
-</table>
-    
-
 </html>
