@@ -7,7 +7,7 @@
     align-items: center;
     margin:0;
     background: rgba(255,211,181,1);
-background: -moz-linear-gradient(left, rgb(228, 146, 92) 0%, rgb(241, 184, 137) 37%, rgb(247, 193, 140) 65%, rgba(255,191,148,1) 85%, rgba(255,211,181,1) 100%);
+background: linear-gradient(to left, rgb(228, 146, 92) 0%, rgb(241, 184, 137) 37%, rgb(247, 193, 140) 65%, rgba(255,191,148,1) 85%, rgba(255,211,181,1) 100%);
 background: -webkit-gradient(left top, right top, color-stop(0%, rgb(228, 146, 92)), color-stop(37%, rgb(241, 184, 137)), color-stop(65%, rgb(247, 193, 140)), color-stop(85%, rgba(255,191,148,1)), color-stop(100%, rgba(255,211,181,1)));
 background: -webkit-linear-gradient(left, rgb(228, 146, 92) 0%, rgb(241, 184, 137) 37%, rgb(247, 193, 140) 65%, rgba(255,191,148,1) 85%, rgba(255,211,181,1) 100%);
 background: -o-linear-gradient(left, rgb(228, 146, 92) 0%, rgb(241, 184, 137) 37%, rgb(247, 193, 140) 65%, rgba(255,191,148,1) 85%, rgba(255,211,181,1) 100%);
@@ -55,8 +55,10 @@ body {
 }
 
 .sidebar a:hover:not(.active) {
-  background-color: #2bc93081;
-  color: white;
+  
+    background-color: #2a8f2d;
+    opacity: 0.55;
+    color: white;
 }
 
 div.content {
