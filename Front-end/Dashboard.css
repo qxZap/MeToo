@@ -7,7 +7,7 @@
     align-items: center;
     margin:0;
     background: rgba(255,211,181,1);
-background: -moz-linear-gradient(left, rgb(228, 146, 92) 0%, rgb(241, 184, 137) 37%, rgb(247, 193, 140) 65%, rgba(255,191,148,1) 85%, rgba(255,211,181,1) 100%);
+background: linear-gradient(to left, rgb(228, 146, 92) 0%, rgb(241, 184, 137) 37%, rgb(247, 193, 140) 65%, rgba(255,191,148,1) 85%, rgba(255,211,181,1) 100%);
 background: -webkit-gradient(left top, right top, color-stop(0%, rgb(228, 146, 92)), color-stop(37%, rgb(241, 184, 137)), color-stop(65%, rgb(247, 193, 140)), color-stop(85%, rgba(255,191,148,1)), color-stop(100%, rgba(255,211,181,1)));
 background: -webkit-linear-gradient(left, rgb(228, 146, 92) 0%, rgb(241, 184, 137) 37%, rgb(247, 193, 140) 65%, rgba(255,191,148,1) 85%, rgba(255,211,181,1) 100%);
 background: -o-linear-gradient(left, rgb(228, 146, 92) 0%, rgb(241, 184, 137) 37%, rgb(247, 193, 140) 65%, rgba(255,191,148,1) 85%, rgba(255,211,181,1) 100%);
@@ -20,6 +20,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#dc874e', end
     width:12vw;
     margin-top: -15px;
     margin-bottom: -15px;
+    margin-left: 1vw;
 }
 body {font-family: Arial, Helvetica, sans-serif;}
 * {box-sizing: border-box;}
@@ -45,6 +46,7 @@ body {
   padding: 16px;
   text-decoration: none;
   border-radius:4px;
+  margin-left: 1vw;
 }
  
 .sidebar a.active {
@@ -53,8 +55,10 @@ body {
 }
 
 .sidebar a:hover:not(.active) {
-  background-color: #2bc93081;
-  color: white;
+  
+    background-color: #2a8f2d;
+    opacity: 0.55;
+    color: white;
 }
 
 div.content {
@@ -70,7 +74,7 @@ div.content {
     position: relative;
   }
   .sidebar a {float: left;}
-  div.content {margin-left: 0;}
+  div.content {margin-left: 1vw;}
 }
 
 @media screen and (max-width: 400px) {
@@ -125,7 +129,7 @@ input[type=text].search {
     background-repeat: no-repeat;
     -webkit-transition: width 0.4s ease-in-out;
     transition: width 0.4s ease-in-out;
-    margin-left: 17.7vw;
+    margin-left: 16.7vw;
     border-radius:6px;
 }
 
@@ -133,38 +137,6 @@ input[type=text].search:focus {
     width: 27%;
 }
 
-input[type="file"]  {
-    background: rgba(255,255,255,0.1);
-    border: none;
-    font-size: 16px;
-    height: auto;
-    margin: 0;
-    outline: 0;
-    padding: 15px;
-    width: 100%;
-    background-color: #e8eeef;
-    color: #8a97a0;
-    box-shadow: 0 1px 0 rgba(0,0,0,0.03) inset;
-    margin-bottom: 30px;
-}
-
-
-fieldset {
-    margin-bottom: 30px;
-    border: none;
-}
-
-
-
-label {
-    display: block;
-    margin-bottom: 8px;
-}
-
-label.light {
-    font-weight: 300;
-    display: inline;
-}
 
 input[type=text],input[type=password],input[type=date], select, textarea {
     
