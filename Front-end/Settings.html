@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="icon" href="assets/icon.png">    
+        <link rel="stylesheet" type="text/css" href="Dashboard.css">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>MeToo</title> 
+    </head>
+    <body class="bgGradient">
+        
+      <div class="logoSearch">
+        <!--dropdown menu-->
+          <div class="dropdown">
+              <a href="#" class="account" >
+              <img src="assets/UserPhoto.png" class="profile-circle"/>
+              </a>
+              <div class="submenu">
+              <ul class="root">
+              <li >
+              <a href="Dashboard.html" >Dashboard</a>
+              </li>
+              <li >
+              <a href="MyProfile.html" >Profile</a>
+              </li>
+              <li >
+              <a href="Settings.html">Settings</a>
+              </li>
+              <li>
+              <a href="SingOut.html">Sign Out</a>
+              </li>
+              </ul>
+              </div>
+              </div>
+
+      <img class="imag" src="assets/logo.png">   
+      
+        <h1 style="text-align:center"> Settings </h1>
+        
+      
+
+        
+        
+
+
+<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+  <script>
+$(document).ready(function(){
+$(".account").click(function()
+{
+var X=$(this).attr('id');
+if(X==1)
+{
+$(".submenu").hide();
+$(this).attr('id', '0'); 
+}
+else
+{
+$(".submenu").show();
+$(this).attr('id', '1');
+}
+});
+$(".submenu").mouseup(function()
+{
+return false
+});
+$(".account").mouseup(function()
+{
+return false
+});
+$(document).mouseup(function()
+{
+$(".submenu").hide();
+$(".account").attr('id', '');
+});
+});
+  </script>
+
+
+    </body>
+</html>
