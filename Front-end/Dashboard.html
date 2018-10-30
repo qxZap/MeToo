@@ -9,14 +9,34 @@
     <body class="bgGradient">
         
       <div class="logoSearch">
+        <!--dropdown menu-->
+          <div class="dropdown">
+              <a href="#" class="account" >
+              <img src="assets/UserPhoto.png" class="profile-circle"/>
+              </a>
+              <div class="submenu">
+              <ul class="root">
+              <li >
+              <a href="#" >Dashboard</a>
+              </li>
+              <li >
+              <a href="#" >Profile</a>
+              </li>
+              <li >
+              <a href="#">Settings</a>
+              </li>
+              <li>
+              <a href="#">Sign Out</a>
+              </li>
+              </ul>
+              </div>
+              </div>
+
       <img class="imag" src="assets/logo.png">   
           <input type="text" class="search" name="search" placeholder="Search..">
-
       </div>
 
-      
 
-        
         <div class="sidebar">
           <a class="active" href="#browse">Browse</a>
           <a href="#youip">Local</a>
@@ -63,32 +83,8 @@
         </tr>
         </table>
 
-<!--dropdown menu-->
 
-<div class="dropdown">
-    <a href="#" class="account" >
-    <img src="assets/gabiPoza.png" class="profile-circle"/>
-    </a>
-    <div class="submenu">
-    <ul class="root">
-    <li >
-    <a href="#" >Dashboard</a>
-    </li>
-    <li >
-    <a href="#" >Profile</a>
-    </li>
-    <li >
-    <a href="#">Settings</a>
-    </li>
-    <li>
-    <a href="#">Sign Out</a>
-    </li>
-    </ul>
-    </div>
-    </div>
-
-
-    <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
   <script>
 $(document).ready(function(){
 $(".account").click(function()
