@@ -15,6 +15,36 @@ background: -ms-linear-gradient(left, rgb(228, 146, 92) 0%, rgb(241, 184, 137) 3
 background: linear-gradient(to right, rgb(228, 146, 92) 0%, rgb(241, 184, 137) 37%, rgb(247, 193, 140) 65%, rgba(255,191,148,1) 85%, rgba(255,211,181,1) 100%);
 filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#dc874e', endColorstr='#ffd3b5', GradientType=1 );}
 
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333;
+}
+
+li {
+    float: left;
+}
+
+li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+/* Change the link color to #111 (black) on hover */
+li a:hover {
+    background-color: #111;
+}
+
+.active {
+    background-color: #1387aa;
+}
+
 .imag {
     height:7vw;
     width:12vw;
@@ -45,7 +75,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#dc874e', end
     text-align: center;
     text-decoration: none;
     display: inline-block;
-    font-size: 3.1vw;
+    font-size: 3.3vw;
     margin: 0.37vw 0.3vw;
     cursor: pointer;
     border-radius: 50px;
