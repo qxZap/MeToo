@@ -32,19 +32,17 @@
               </ul>
               </div>
               </div>
-
-          
-              
       <img class="imag" alt="Smiley face" src="assets/logo.png">  
+      </div>
       
       
       
-      <form action="/action_page.php" method="post">
+      <form action="/action_page.php"  method="post">
 
     <fieldset>
 
         <label for="picture">New Profile picture</label>
-        <input type="file" name="pic" accept="image/*">
+        <input type="file" id="picture" name="pic" accept="image/*">
     </fieldset>
     
     <button type="submit">Save</button>
@@ -54,14 +52,14 @@
       
       
       
-      <form action="/action_page.php" alt="Smiley face" method="post">
+      <form action="/action_page.php" method="post">
 
     <fieldset>
         <h1>Change Email</h1>
 
         <label for="mail">New Email:</label>
         <input type="email" id="mail" name="user_email">
-    </fieldset>   
+    </fieldset>
     
     <button type="submit">Save</button>
 </form>
@@ -125,5 +123,5 @@ $(".account").attr('id', '');
   </script>
 
 
- </body>
+    </body>
 </html>
