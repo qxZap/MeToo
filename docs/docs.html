@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="ro-RO">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>MeToo</title>
+    <link rel="stylesheet" href="scholarly.css">
+</head>
+<body>
+<header>
+    <h1>Scholarly HTML - MeToo</h1>
+</header>
+<article typeof="sa:AuthorsList">
+    <h2>Autori</h2>
+    <ul>
+        <li typeof="sa:ContributorRole" property="schema:author">
+      <span>
+        <meta property="schema:givenName" content="">
+        <meta property="schema:additionalName" content="">
+        <meta property="schema:familyName" content="">
+            <span property="schema:name">Milea Mihai-Cristian 3A4</span>
+          <br>
+        <li><span property="schema:name">Gabriela Macovei 3A4</span></li>
+      </span>
+        </li>
+    </ul>
+</article>
+
+<article id="what" typeof="schema:ScholarlyArticle" resource="#">
+    <section id="introducere">
+        <h3>Introducere</h3>
+        <p>Scopul acestui raport tehnic in format Scholarly HTML este de a descrie detaliile care vizeaza progresul proiectului intitulat MeToo(meet-up we tool).
+        </p>
+    </section>
+
+    <section id="descriere">
+        <h3>Descriere proiect MeToo</h3>
+        <p>
+            Să se dezvolte o aplicaţie de tip PWA (Progressive Web App) menită a încuraja interacţiunea dintre persoanele care studiază/lucrează în localuri comune disponibile într-un areal geografic: biblioteci, cafenele sau spaţii de co-working. Fiecare utilizator, autentificat via un cont disponibil pe o reţea socială, odată ajuns într-un astfel de spaţiu va anunţa public ce activitate efectuează – astfel de mesaje vor putea fi parametrizate (de exemplu, "implementez <software> folosind pentru front-end <bibliotecă> şi ca back-end <platforma> pentru <limbajul de programare>" sau "studiez <concept|tehnologie>"). De asemenea, fiecare persoană participantă va oferi lista abilităţilor în funcţie de o anumită sarcină de efectuat – e.g., "pentru <programare> ştiu ca <expert|novice> <limbaj|paradigmă|framework>, iar pentru <design> am lucrat cu <software>". Toţi utilizatorii interesaţi de aceste tehnologii/abilităţi vor primi automat o notificare aferentă, sistemul oferind suport pentru realizarea de conversaţii (a)sincrone, invitaţii de întâlnire "la o cafea", partajare de calendare comune etc. De asemenea, utilizatorii vor putea vizualiza într-o manieră atractivă care sunt cele mai populare locuri din oraş şi ce tipuri de persoane le frecventează (de exemplu, la BCU vin mulţi dezvoltatori JavaScript pasionaţi de numismatică). Inspiraţie: Progressive Web Apps Rocks.
+        </p>
+    </section>
+
+    <section id="obiective">
+        <h3>Obiective</h3>
+        <p>Site-ul nostru ofera utilizatorului o interfata intuitiva si placuta si posibilitatea gasirii unor coechipieri de lucru la diverse proiecte in functie de locatia utilizatorilor.
+            Utilizatorul poate sa isi aleaga echipa in care vrea sa lucreze in functie de preferinte (limbaj, scop, castig, etc.)
+        </p>
+    </section>
+
+    <section id="metode">
+        <h3>Metode folosite</h3>
+        <p>Pentru a putea detalia tehnologiile folosite in cadrul aplicatiei este necesara reamintirea unor notiuni teoretice utilizare in dezvoltarea site-ului.
+        </p>
+        <p>Interfata a fost construita folosind HTML5 si stilizata folosind CSS3. HTML5 este un limbaj folosit pentru structurarea si prezentarea continutului pentru World Wide Web, o tehnologie nucleu pentru Internet, iar CSS reprezinta acronimul pentru Cascading Style Sheets. CSS este un limbaj (style language) care defineste "layout-ul" pentru documentele HTML. CSS acopera culori, font-uri, margini, linii, imagini de fundal, pozitii avansate si multe alte optiuni utile in design.</p>
+        <p>
+        More to be added..</p>
+    </section>
+
+    <section id="utilizare">
+        <h3>Mod de utilizare</h3>
+        <p>Interfata de login a unui utilizator necesita 2 campuri, un cont de utilizator unic si parola aferenta acestuia.</p>
+        <ul>
+            <li>
+                Email/Username: Utilizatorul va introduce emailul sau folosit si la inregistrare sau un username pe care si l-a atribuit.
+            </li>
+            <li>
+                Parola: Parola aferenta emailului introdus.
+            </li>
+        </ul>
+        <p>In cazul in care vizitatorul doreste sa isi creeze cont acesta va fi redirectionat spre o noua pagina unde i se va oferi aceasta posibilitate.</p>
+        <p>Interfata de inregistrare cuprinde mai multe campuri obligatorii pentru crearea unui nou cont.</p>
+        <ul>
+            <li>
+                Login Name: Utilizatorul introduce un username prin care sa fie recunoscut atat de ceilalti utilizatori, cat si pentru a se putea loga cu acesta.
+            </li>
+            <li>
+                Parola: Parola dorita pentru contul nou creat.Parola va fi criptata si stocata in baza de date.
+            </li>
+            <li>
+                Confirma Parola: In acest camp se va reintroduce parola completata anterior pentru confirmare.Se va face un compare intre cele doua parole criptate.
+            </li>
+            <li>
+                Email: Utilizatorul introduce emailul in baza noastra de date, in cazul unuia deja existent va fi atentionat.
+            </li>
+        </ul>
+        <p>Dupa ce utilizatorul s-a logat, acesta va avea urmatoarele optiuni:</p>
+        <ul>
+            <li>
+                Va putea cauta proiecte ce cauta dezvoltatori, fie ca in zona, fie ca sub acelasi ip.
+            </li>
+            <li>
+                Va putea crea un proiect bazat pe o anumita locatie, inclusiv ip, unde poate decide cate persoane pot lua parte la proiect.
+            </li>
+            <li>
+                Isi va putea schimba parola, email-ul si alte setari legate de cont.
+            </li>
+        </ul>
+    </section>
+
+    <section id="bibliografie">
+        <h3>Bibliografie</h3>
+        <table>
+            <thead>
+            <tr>
+                <th>Denumire</th>
+                <th>URL</th>
+            </tr>
+            </thead>
+            <tr>
+                <td>E-learn</td>
+                <td>http://www.e-learn.ro/tutorial/css/ce-este-css-a/67/1/37.htm</td>
+            </tr>
+            <tr>
+                <td>Wikipedia</td>
+                <td>https://ro.wikipedia.org/wiki/HTML5</td>
+            </tr>
+            <tr>
+                <td>Scholarly</td>
+                <td>http://scholarly.vernacular.io/</td>
+            </tr>
+        </table>
+    </section>
+
+</article>
+<footer>
+    <p>
+        CLIW 2018
+        <a href="https://github.com/qxZap/MeToo">Github Repository</a>
+        UAIC - Facultatea de Informatica Iasi
+    </p>
+</footer>
+</body>
+</html>
