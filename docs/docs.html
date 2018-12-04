@@ -18,9 +18,9 @@
         <meta property="schema:givenName" content="">
         <meta property="schema:additionalName" content="">
         <meta property="schema:familyName" content="">
-            <span property="schema:name">Milea Mihai-Cristian 3A4</span>
+            <span property="schema:name">Milea Mihai-Cristian I3A4</span>
           <br>
-        <li><span property="schema:name">Gabriela Macovei 3A4</span></li>
+        <li><span property="schema:name">Gabriela Macovei I3A4</span></li>
       </span>
         </li>
     </ul>
@@ -29,7 +29,7 @@
 <article id="what" typeof="schema:ScholarlyArticle" resource="#">
     <section id="introducere">
         <h3>Introducere</h3>
-        <p>Scopul acestui raport tehnic in format Scholarly HTML este de a descrie detaliile care vizeaza progresul proiectului intitulat MeToo(meet-up we tool).
+        <p>Scopul acestui raport tehnic in format Scholarly HTML este de a descrie detaliile care vizeaza progresul proiectului intitulat MeToo(meet-up web tool).
         </p>
     </section>
 
@@ -86,7 +86,7 @@
         <p>Dupa ce utilizatorul s-a logat, acesta va avea urmatoarele optiuni:</p>
         <ul>
             <li>
-                Va putea cauta proiecte ce cauta dezvoltatori, fie ca in zona, fie ca sub acelasi ip.
+                Va putea cauta proiecte ce cauta dezvoltatori, fie in zona, fie sub acelasi ip.
             </li>
             <li>
                 Va putea crea un proiect bazat pe o anumita locatie, inclusiv ip, unde poate decide cate persoane pot lua parte la proiect.
@@ -98,12 +98,67 @@
     </section>
     
     
+    <section id="backend">
+        <h3>Back-End</h3>
+        <p>Serverul consta intr-un api in python, utilizand BaseHTTPServer, baza de date va avea 3 tabele SQL si una NoSQL si ruleaza in acelasi environment.</p>
+        <p>Tabele:</p>
+        <ul>
+            <li>
+                Acess
+            </li>
+            <li>
+                Users
+            </li>
+            <li>
+                Rooms
+            </li>
+            <li>
+                Chat (NoSQL)
+            </li>
+        </ul>
+        <h3>Comunicarea user-server</h3>
+        <p>In mare utilizatorul va avea un cod js incarcat in browser care va face cereri la server iar pentru manevrarea evenimentelor exista urmatoarele module:</p>
+        <ul>
+            <li>
+                Init - utilizatorul poate avea sau nu token de access, iar daca are, acesta va fi redirectat catre dashboard. In caz contrar, i se arata doar pagina de home
+            </li>
+            <li>
+                Register - creeaza contul utilizatorului si atribuie un token de access si va fi redirectat catre dashboard
+            </li>
+            <li>
+                Login - utilizatorul se poate loga cu username/email si parola iar dupa ce se logeaza i se atribuie un token de access si va fi redirectat catre dashboard
+            </li>
+            <li>
+                Rooms -  permite adaugarea, creearea, editarea si stergerea camerelor de lucru. Utilizatorul host al camerei detine un link de invitatie si il poate distribui personelor cunoscute, sau in mesaj pentru a face sincronizea utilizatorilor mai usoara
+            </li>
+            <li>
+                Chat - odata ce utilizatorii sunt pe aceeasi camera, acestia pot comunica pe un chat pentru a se gasi unii pe altii in locatia respectiva, sau pentru a partaja diverse continuturi
+            </li>
+            <li>
+                Dashboard - aici se afla nucleul managementului camerelor. El decide cand se adauga, sterge, etc un room. Acesta da utilizatorului o lista cu camerele care se intersecteaza pe o raza de 30km daca acesta doreste sa le vada pe toate, sau locale pentru cele sub acelasi ip sau aceeasi locatie, sau daca utilizatorul detine un link, poate accesa camera dupa un link de invitatie.
+            </li>
+            <li>
+                User - modul ce ajuta utilizatorii in schimbarea preferintelor e.g : email, username, password..
+            </li>
+        </ul>
+        <p>Sesiunea se pastreaza prin token de access: utilizatorul va avea atribuit un token de access pana cand va da logout. Astfel, atunci cand utilizatorul revine pe site nu va fi nevoit sa isi introduca datele de login iar.</p>
+        <h3>De ce NoSQL pe langa SQL?</h3>
+        <p>Este necesar ca preluarea datelor cu privire la conversatiile intre utilizatori sa se petreaca intr-un timp cat mai scurt. DynamoDB pune o solutie prin utilizarea hash-ului. Se face hash peste user_id intre utilizatori gen: "uid1-uid2", pentru a obtine mesajele in o(1).</p>
+        <h3>De ce python?</h3>
+        <p>Prelucrearea datelor este mai usoara si mai sigura in python, deoarece pentru obtinerea datelor dintr-un json se face in putine linii de cod.</p>
+        <p>auxToken = request['token']</p>
+    </section>
+    
+    
     <section id="Poze">
         <h3>Schite ale proiectului</h3>
         <img class="imag" alt="Smiley face" src="1.jpg">
         <img class="imag" alt="Smiley face" src="2.jpg">
         <img class="imag" alt="Smiley face" src="3.png">
         <img class="imag" alt="Smiley face" src="4.png">
+        <img class="imag" alt="Smiley face" src="5.png">
+        <img class="imag" alt="Smiley face" src="6.png">
+        <img class="imag" alt="Smiley face" src="7.png">
     
     </section>
 
@@ -127,6 +182,14 @@
             <tr>
                 <td>Scholarly</td>
                 <td>http://scholarly.vernacular.io/</td>
+            </tr>
+            <tr>
+                <td>BaseHHTPServer - python</td>
+                <td>https://docs.python.org/2/library/basehttpserver.html</td>
+            </tr>
+            <tr>
+                <td>Python</td>
+                <td>https://www.python.org/</td>
             </tr>
         </table>
     </section>
