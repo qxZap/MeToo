@@ -233,6 +233,11 @@
                     <td>/users/keywords?=string:keyword1... , string:keywordN</td>
                     <td>Se returneaza un json cu toti utilizatorii ce par a se incadra in ceea ce ar putea cauta un utilizator.</td>
                 </tr>
+                <tr>
+                    <td>GET</td>
+                    <td>/string:activation_link</td>
+                    <td>Se activeaza utilizatorul cu un anumit id. Acesta fiind preluat din tokenaccess, unde va fi 0 pentru utilizatorii care nu au contul activat</td>
+                </tr>
             </tbody>
         </table>
     </section>
