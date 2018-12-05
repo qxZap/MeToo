@@ -98,7 +98,7 @@
     </section>
     
     
-    <section id="backend">
+    <section id="backendDB">
         <h3>Back-End</h3>
         <p>Serverul consta intr-un api in python, utilizand BaseHTTPServer, baza de date va avea 3 tabele SQL si una NoSQL si ruleaza in acelasi environment.</p>
         <p>Tabele:</p>
@@ -116,6 +116,9 @@
                 Chat (NoSQL)
             </li>
         </ul>
+    </section>
+    
+    <section id="server">
         <h3>Comunicarea user-server</h3>
         <p>In mare utilizatorul va avea un cod js incarcat in browser care va face cereri la server iar pentru manevrarea evenimentelor exista urmatoarele module:</p>
         <ul>
@@ -132,13 +135,13 @@
                 Rooms -  permite adaugarea, creearea, editarea si stergerea camerelor de lucru. Utilizatorul host al camerei detine un link de invitatie si il poate distribui personelor cunoscute, sau in mesaj pentru a face sincronizea utilizatorilor mai usoara
             </li>
             <li>
-                Chat - odata ce utilizatorii sunt pe aceeasi camera, acestia pot comunica pe un chat pentru a se gasi unii pe altii in locatia respectiva, sau pentru a partaja diverse continuturi
+                Chat - odata ce utilizatorii sunt pe aceeasi camera, acestia pot comunica pe un chat pentru a se gasi unii pe altii in locatia respectiva, sau pentru a partaja diverse continuturi. Se returneaza doar ultimele 50 de mesaje, iar daca utilizatorul doreste sa vada mai mult va avea la dispozitie un buton ce ii permite acest lucru
             </li>
             <li>
                 Dashboard - aici se afla nucleul managementului camerelor. El decide cand se adauga, sterge, etc un room. Acesta da utilizatorului o lista cu camerele care se intersecteaza pe o raza de 30km daca acesta doreste sa le vada pe toate, sau locale pentru cele sub acelasi ip sau aceeasi locatie, sau daca utilizatorul detine un link, poate accesa camera dupa un link de invitatie.
             </li>
             <li>
-                User - modul ce ajuta utilizatorii in schimbarea preferintelor e.g : email, username, password..
+                User - modul ce ajuta utilizatorii in schimbarea preferintelor e.g : email, username, password.. sau cautarea si primirea datelor legate de alti utilizatori
             </li>
         </ul>
         <p>Sesiunea se pastreaza prin token de access: utilizatorul va avea atribuit un token de access pana cand va da logout. Astfel, atunci cand utilizatorul revine pe site nu va fi nevoit sa isi introduca datele de login iar.</p>
@@ -147,7 +150,84 @@
         <h3>De ce python?</h3>
         <p>Prelucrearea datelor este mai usoara si mai sigura in python, deoarece pentru obtinerea datelor dintr-un json se face in putine linii de cod.</p>
         <p>auxToken = request['token']</p>
+        
     </section>
+
+    <section id = "routes">
+        <h3>Routes</h3>
+        <p>Observatie: pentru a distinge utilizatorii in cazul in care se doreste de exemplu modificarea datelor cu privire la un utilizator se foloseste tokenul de access.</p>
+        <table>
+            <tbody>
+                <tr>
+                    <td>Metoda</td>
+                    <td>Ruta</td>
+                    <td>Ce se intampla?</td>
+                </tr>
+                <tr>
+                    <td>GET</td>
+                    <td>/roominfo/string:roomid</td>
+                    <td>Returneaza informatii legate de un room</td>
+                </tr>
+                <tr>
+                    <td>POST</td>
+                    <td>/newroom</td>
+                    <td>Se trimite un json cu datele legate de noua camera</td>
+                </tr>
+                <tr>
+                    <td>POST</td>
+                    <td>/editroom/string:roomid</td>
+                    <td>Se trimite un json cu datele legate de camera ce se doreste a fi modificata</td>
+                </tr>
+                <tr>
+                    <td>DELETE</td>
+                    <td>/deleteroom/string:roomid</td>
+                    <td>Se sterge camera cu id-ul roomid</td>
+                </tr>
+                <tr>
+                    <td>POST</td>
+                    <td>/newuser</td>
+                    <td>Se trimite un json cu datele de register ale unui potential nou utilizator</td>
+                </tr>
+                <tr>
+                    <td>POST</td>
+                    <td>/login</td>
+                    <td>Se trimite un json cu datele de login ale unui utilizator si trebuiesc validate</td>
+                </tr>
+                <tr>
+                    <td>GET</td>
+                    <td>/getrooms</td>
+                    <td>Se trimite un json cu conditiile camerei (ex: sa nu fie plina, sa contina keyword 'scala' etc) intr-un range de maxim 30km</td>
+                </tr>
+                <tr>
+                    <td>POST</td>
+                    <td>/chat/string:uid2</td>
+                    <td>Se trimite un json cu mesajul pe care vrea utilizatorul sa il trimita altui utilizator (uid2)</td>
+                </tr>
+                <tr>
+                    <td>GET</td>
+                    <td>/chat/string:uid2</td>
+                    <td>Se returneaza cateva din mesajele din conversatia intre cei doi utilizatori si messid de la primul mesaj din cele selectate</td>
+                </tr>
+                <tr>
+                    <td>GET</td>
+                    <td>/user/string:uid</td>
+                    <td>Se returneaza setarile sau informatiile publice legate de utilizatorul cu id-ul uid</td>
+                </tr>
+                <tr>
+                    <td>POST</td>
+                    <td>/user/string:uid</td>
+                    <td>Se trimite un json cu datele ce se doresc a fi rescrise cu privire la setarile utilizatorului</td>
+                </tr>
+                <tr>
+                    <td>GET</td>
+                    <td>/users/keywords?=string:keyword1... , string:keywordN</td>
+                    <td>Se returneaza un json cu toti utilizatorii ce par a se incadra in ceea ce ar putea cauta un utilizator.</td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+    
+    
     
     
     <section id="Poze">
