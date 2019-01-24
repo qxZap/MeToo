@@ -12,14 +12,19 @@
         <img class="imag" alt="Smiley face" src="assets/logo.png">    
 
     <div class="container">
-    <form action="/action_page.php">
-        <input type="text" id="fname" name="uname" placeholder="Username or email"><br>
-        <input type="password"  name="passwd" placeholder=" password.."><br>
-        <input type="submit" value="Log In">
+    <form onsubmit="return login();" id="loginForm" enctype='application/json'>
+        <h1 id="login_check">Login</h1>
+        <input type="text" id="username" name="uname" placeholder="Username or email"><br>
+        <input type="password" id="password"  name="passwd" placeholder=" password.."><br>
+        <img id="loading" style="" src="https://www.ergodirect.nl/images/loading.gif" alt="Girl in a jacket" width="100" height="100"><br>
+        <input id="loginBtn" type="submit" value="Log In">
     </form>
     </div>
 
 </body>
-    
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script src="js/login.js"></script>
+<script src="js/utils.js"></script>
 
 </html>

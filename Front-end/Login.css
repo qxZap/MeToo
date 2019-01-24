@@ -199,6 +199,13 @@ select {
     border-radius: 2px;
 }
 
+img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+
+}
+
 button {
     padding: 19px 39px 18px 39px;
     color: #FFF;

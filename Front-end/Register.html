@@ -12,22 +12,21 @@
 <img class="imag" alt="Smiley face" src="assets/logo.png">
 
 
-<form action="/action_page.php" method="post">
+<form onsubmit="return register();" id="registerForm" enctype='application/json'>
 
     <h1>Sign Up</h1>
-    <!-- fieldset tag is used to group related elements in a form.-->
     <fieldset>
 
-        <label for="name">Name:</label>
+        <label id="nameLabel" for="name">Name:</label>
         <input type="text" id="name" name="user_name">
 
-        <label for="mail">Email:</label>
+        <label id="mailLabel" for="mail">Email:</label>
         <input type="email" id="mail" name="user_email">
 
         <label for="date">Date Of Birth:</label>
         <input type="date" id="date" name="user_date">
 
-        <label for="password">Password:</label>
+        <label id="passwordLabel" for="password"> Password:</label>
         <input type="password" id="password" name="user_password">
 
         <label for="password">Retype Password:</label>
@@ -46,9 +45,11 @@
                 <option value="capeverde">Cape verde</option>
         </select>
     </fieldset>
-    <button type="submit">Sign Up</button>
+    <button  type="submit">Sign Up</button>
 </form>
 
 </body>
-
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script src="js/register.js"></script>
+<script src="js/utils.js"></script>
 </html>
