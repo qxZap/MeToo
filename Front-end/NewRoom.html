@@ -12,20 +12,26 @@
 <img class="imag" alt="Smiley face" src="assets/logo.png">
 
 
-<form action="/action_page.php" method="post">
+<form onsubmit="return newRoom();" id="newRoomForm" enctype='application/json'>
 
     <h1>New room</h1>
     <fieldset>
 
         <label for="roomname">Name:</label>
-        <input type="roomname" id="roomname" name="room_name">
+        <input type="roomname" id="roomname" placeholder="Room name" name="room_name">
 
-        <label for="locatiion">Location:</label>
-        <input type="location" id="location" name="location">
+        <label for="textarea">Description:</label>
+        <input type="textarea" id="description" placeholder="Description" name="description">
+
+        <label for="location">Location:</label>
+        <input type="location" id="location" placeholder="Leave black to use our own" name="location">
+
+        <label for="size">Size:</label>
+        <input type="size" id="size" placeholder="Room size" name="size">
 
 
         <label for="tags">Tags:</label>
-        <input type="tags" id="tags" name="tags">
+        <input type="tags" id="tags" placeholder="Tags for the search engine"  name="tags">
 
     </fieldset>
     
@@ -33,5 +39,7 @@
 </form>
 
 </body>
-
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script src="js/newroom.js"></script>
+<script src="js/utils.js"></script>
 </html>

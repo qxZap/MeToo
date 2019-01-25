@@ -104,7 +104,7 @@ input[type=text].search:focus {
 }
 
 
-input[type=text],input[type=password],input[type=date],input[type=location],input[type=roomname],input[type=tags], select, textarea {
+input[type=text],input[type=textarea],input[type=password],input[type=date],input[type=location],input[type=roomname],input[type=size],input[type=tags], select, textarea {
 
     width: 30%;
     padding: 12px;
@@ -118,7 +118,7 @@ input[type=text],input[type=password],input[type=date],input[type=location],inpu
 }
 
 @media only screen and (max-width: 600px) {
-    input[type=text],input[type=password],input[type=date], select, textarea {
+    input[type=text],input[type=password],input[type=date],input[type=size],input[type=texarea], select, textarea {
 
         width: 30%;
         padding: 12px;
@@ -177,7 +177,9 @@ input[type="date"],
 input[type="email"],
 input[type="location"],
 input[type="roomname"],
+input[type="size"],
 input[type="tags"],
+input[type="textarea"],
 textarea,
 select {
     background: rgba(255,255,255,0.1);

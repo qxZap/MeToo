@@ -60,4 +60,12 @@ function bit_rol(d, _) {
 	return d << _ | d >>> 32 - _
 }
 
-
+function getFromLocal(who){
+	var intro = localStorage.getItem(who);
+	  var obj = null;
+	  if(intro!=null)
+	    obj = JSON.parse(intro);
+	  else
+	    obj = new Object();
+	return obj;
+}

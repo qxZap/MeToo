@@ -2,11 +2,6 @@ document.getElementById('login_check').style.display = 'none';
 stopLoading()
 var creditals = [];
 
-document.getElementById('loginForm').addEventListener('keypress', function(event) {
-        if (event.keyCode == 13) {
-            event.preventDefault();
-        }
-    });
 $("#loginForm").submit(function(e) {
     e.preventDefault();
 });

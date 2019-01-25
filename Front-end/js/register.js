@@ -67,7 +67,7 @@ function register(){
 
 }
 
-window.setInterval(function checkUsername(){
+window.setInterval(function checkVars(){
 	var name = document.getElementById("name").value;
 	var mail = document.getElementById("mail").value;
 	if(usernames[name]==='taken'){
