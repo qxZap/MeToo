@@ -37,7 +37,11 @@ function login(){
 		    	document.getElementById('login_check').style.display = 'block';
 		    	document.getElementById('login_check').innerHTML = "<font color="+"red"+">Wrong creditals</font>"
 		    	creditals.push(String(username+'///'+passwordPure));
-		    	//To Do in that case
+		    }
+		    if (xhr.status === 214){
+		    	document.getElementById('login_check').style.display = 'block';
+		    	document.getElementById('login_check').innerHTML = "<font color="+"red"+">Account not activated</font>"
+		    	creditals.push(String(username+'///'+passwordPure));
 		    }
 
 			stopLoading();

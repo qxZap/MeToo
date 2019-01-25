@@ -10,36 +10,48 @@
 </head>
 <body class="bgGradient">
 <img class="imag" alt="Smiley face" src="assets/logo.png">
-
+<div id="superDiv" syle="display: none">
 
 <form onsubmit="return newRoom();" id="newRoomForm" enctype='application/json'>
 
     <h1>New room</h1>
     <fieldset>
 
-        <label for="roomname">Name:</label>
+        <label id="roomnameLabel" for="roomname">Name:<font color="red">*</font></label>
         <input type="roomname" id="roomname" placeholder="Room name" name="room_name">
 
-        <label for="textarea">Description:</label>
-        <input type="textarea" id="description" placeholder="Description" name="description">
+        <label id="descriptionLabel" for="textarea">Description:<font color="red">*</font></label>
+        <input  type="textarea" id="description" placeholder="Description" name="description">
 
-        <label for="location">Location:</label>
+        <label id="locationLabel" for="location">Location:</label>
         <input type="location" id="location" placeholder="Leave black to use our own" name="location">
 
-        <label for="size">Size:</label>
-        <input type="size" id="size" placeholder="Room size" name="size">
+        <div style="width:420px; height: 350px" id="map"></div>
+
+        <label id="titleLabel" for="textarea">Title:<font color="red">*</font></label>
+        <input type="textarea" id="title" placeholder="Location Title e.g: Bruce Coffee" name="title">
+
+        <label id="linkLabel" for="textarea">Link:</label>
+        <input type="textarea" id="link" placeholder="Link e.g: http://info.uaic.ro" name="link">
+
+        <label id="sizeLabel" for="size">Size:</label>
+        <input type="size" id="size" placeholder="Default as 5" name="size">
+
+        
 
 
-        <label for="tags">Tags:</label>
+        <label id="tagsLabel" for="tags">Tags:</label>
         <input type="tags" id="tags" placeholder="Tags for the search engine"  name="tags">
 
     </fieldset>
     
     <button type="submit">Create</button>
 </form>
-
+</div>
 </body>
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCmAPirfLXmN9as4r7XZJ_wbQwwrn9dICw&callback=initMap" async defer></script>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 <script src="js/newroom.js"></script>
 <script src="js/utils.js"></script>
+
 </html>

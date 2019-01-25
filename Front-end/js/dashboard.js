@@ -1,3 +1,5 @@
+
+
 var userLat = null;
 var userLon = null;
 var nowtf="";
@@ -58,40 +60,44 @@ function focusTab(who){
 }
 
 function getMyRooms(){
-    var xhr = new XMLHttpRequest();
-    var url = "http://127.0.0.1:8090/rooms/myrooms/"+localStorage.getItem("MeTooAccessToken");
-    xhr.open("GET", url, true);
-    xhr.setRequestHeader("Content-Type", "application/json");
-    xhr.onreadystatechange = function () {
-        if (xhr.readyState === 4 && xhr.status === 200) {
-            var json = JSON.parse(xhr.responseText);
-            localStorage.setItem("MeTooRooms",JSON.stringify(json));
-            focusTab('yourRoomsTab');
-            listRooms();
-        }
-    };    
-    xhr.send(null);
+    //if(hasAccess(localStorage.getItem("MeTooAccessToken"))!=false){
+      var xhr = new XMLHttpRequest();
+      var url = "http://127.0.0.1:8090/rooms/myrooms/"+localStorage.getItem("MeTooAccessToken");
+      xhr.open("GET", url, true);
+      xhr.setRequestHeader("Content-Type", "application/json");
+      xhr.onreadystatechange = function () {
+          if (xhr.readyState === 4 && xhr.status === 200) {
+              var json = JSON.parse(xhr.responseText);
+              localStorage.setItem("MeTooRooms",JSON.stringify(json));
+              focusTab('yourRoomsTab');
+              listRooms();
+          }
+      };    
+      xhr.send(null);
+
+  
 }
 
 
 function getRooms(lat,lon){
-    var range = 700.1;
+    var range = 100.1;
     localStorage.setItem("userLat",lat);
     localStorage.setItem("userLon",lon);
-
-    var xhr = new XMLHttpRequest();
-    var url = "http://127.0.0.1:8090/rooms/"+range+"/"+lat+"/"+lon;
-    xhr.open("GET", url, true);
-    xhr.setRequestHeader("Content-Type", "application/json");
-    xhr.onreadystatechange = function () {
-        if (xhr.readyState === 4 && xhr.status === 200) {
-            var json = JSON.parse(xhr.responseText);
-            localStorage.setItem("MeTooRooms",JSON.stringify(json));
-            focusTab('browseTab');
-            listRooms();
-        }
-    };    
-    xhr.send(null);
+    //if(hasAccess(localStorage.getItem("MeTooAccessToken"))!=false){
+      var xhr = new XMLHttpRequest();
+      var url = "http://127.0.0.1:8090/rooms/"+range+"/"+lat+"/"+lon;
+      xhr.open("GET", url, true);
+      xhr.setRequestHeader("Content-Type", "application/json");
+      xhr.onreadystatechange = function () {
+          if (xhr.readyState === 4 && xhr.status === 200) {
+              var json = JSON.parse(xhr.responseText);
+              localStorage.setItem("MeTooRooms",JSON.stringify(json));
+              focusTab('browseTab');
+              listRooms();
+          }
+      };    
+      xhr.send(null);
+    
 
 }
 
@@ -118,20 +124,28 @@ function getLocation(){
     }
 }
 
-function printRoom(roomName,location,lobby,lobbySize,owner){
+function printRoom(roomName,location,lobby,lobbySize,owner,title,link){
   var roomOcupation = String(lobby.length)+"/"+String(lobbySize);
   //console.log(roomName,location,roomOcupation,owner);
+  if(link===""||link===null){
+      link = "http://maps.google.com/?ie=UTF8&hq=&ll="+location.split(' ').toString()+"&z=18";
+  }
   table = document.getElementById('listedRooms');
   table.innerHTML +=`
   <tr>
     <td>`+roomName+`</td>
-      <td><img class="location" alt="SmileyFace" src="assets/location.png">`+location+`</td>
+      <td onclick='window.open("`+link+`")' ><img class="location" alt="SmileyFace" src="assets/location.png">`+title+`</td>
       <td>`+roomOcupation+`</td>
       <td>`+owner+`</td>
   </tr>`;
   
 }
-
+// <tr onclick='window.open("http://www.google.com")'> 
+//              <td>C++ Board Game</td>  
+//              <td><img class="location" alt="SmileyFace" src="assets/location.png">  Mama Mia</td> 
+//             <td>2/3</td>  
+//             <td>Radozaur</td> 
+//           </tr>
 
 
 function listRooms(){
@@ -139,21 +153,69 @@ function listRooms(){
 
   for(var iterator in obj['rooms']){
     var room = obj['rooms'][iterator];
-    printRoom(room['roomName'],room['location'],room['lobby'],room['lobbySize'],room['owner']);
+    printRoom(room['roomName'],room['location'],room['lobby'],room['lobbySize'],room['owner'],room['title'],room['link']);
   }
 
   var obj = getFromLocal("toAdd");
   if(obj!=null){
-    printRoom(obj['roomname'],obj['location'],obj['lobby'],obj['size'],obj['owner']);
+    printRoom(obj['roomname'],obj['location'],obj['lobby'],obj['size'],obj['owner'],obj['title'],obj['link']);
     localStorage.setItem("toAdd",null);
   }
 
 
 }
 
+function logOut(){
+      var xhr = new XMLHttpRequest();
+      var url = "http://127.0.0.1:8090/deleteme/"+localStorage.getItem("MeTooAccessToken");
+      xhr.open("DELETE", url, true);
+      xhr.setRequestHeader("Content-Type", "application/json");
+      xhr.onreadystatechange = function () {
+          if (xhr.readyState === 4 && xhr.status === 200) {
+              var json = JSON.parse(xhr.responseText);
+              localStorage.removeItem("MeTooAccessToken");
+              window.location.replace('Login.html')
+          }
+      };    
+      xhr.send(null);
+  ;
+}
+
 function loadRooms(){
   getLocation();
 }
 
+function kickIfForegin(){
+  var accessToken = localStorage.getItem("MeTooAccessToken");
+  if(accessToken===null){
+      window.location.replace('Login.html');
+  }
+  else{
+    // var xhr = new XMLHttpRequest();
+    // var url = "http://127.0.0.1:8090/whoami";
+    // xhr.open("POST", url, true);
+    // xhr.setRequestHeader("Content-Type", "application/json");
+    // xhr.onreadystatechange = function () {
+    //     if (xhr.readyState === 4 && xhr.status === 200) {
+    //         var json = JSON.parse(xhr.responseText);
+    //         if(json['username']&&document.getElementById("superDiv")){
+    //           document.getElementById("superDiv").style.display = "block";
+    //         }
+    //         else{
+    //           localStorage.removeItem("MeTooAccessToken");
+    //           window.location.replace('Login.html');
+    //         }
+    //         if(!json['username']){
+    //           //localStorage.removeItem("MeTooAccessToken");
+    //           window.location.replace('Login.html');
+    //         }
+    //     }
+    // };
+    // var data = JSON.stringify({"accessToken": accessToken});
+    // xhr.send(data);
+      
+  }
+}
 
+kickIfForegin();
 loadRooms();
