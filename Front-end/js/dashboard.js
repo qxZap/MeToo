@@ -80,7 +80,7 @@ function getMyRooms(){
 
 
 function getRooms(lat,lon){
-    var range = 100.1;
+    var range = 300.1;
     localStorage.setItem("userLat",lat);
     localStorage.setItem("userLon",lon);
     //if(hasAccess(localStorage.getItem("MeTooAccessToken"))!=false){
@@ -111,7 +111,6 @@ function getLocation(){
     var lat = localStorage.getItem("userLat");
     var lon = localStorage.getItem("userLon");
     if(lat===null&&lon===null){
-      alert("ramchargers");
       if(navigator.geolocation){
           navigator.geolocation.getCurrentPosition(setPositions);
       }
