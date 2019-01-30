@@ -13,7 +13,7 @@
         <!--dropdown menu-->
           <div class="dropdown">
               <a href="#" class="account" >
-              <img src="assets/UserPhoto.png" alt="Smiley face" class="profile-circle"/>
+              <img id="profilePicture" src="assets/UserPhoto.png" alt="Smiley face" class="profile-circle"/>
               </a>
               <div class="submenu">
               <ul class="root">
@@ -32,20 +32,20 @@
               </ul>
               </div>
               </div>
-      <img class="imag" alt="Smiley face" src="assets/logo.png">  
+      <img href="Dashboard.html" class="imag" alt="Smiley face" src="assets/logo.png">  
       </div>
       
       
       
-      <form action="/action_page.php"  method="post">
+      <form onsubmit="return changePicture();" id="pictureForm" enctype = 'multipart/form-data'>
 
-    <fieldset>
+        <fieldset>
 
-        <label for="picture">New Profile picture</label>
-        <input type="file" id="picture" name="pic" accept="image/*">
-    </fieldset>
+            <label id="pictureLabel" for="picture">New Profile picture:</label>
+            <input id="picture" type="file" id="picture" name="pic" accept="image/*">
+        </fieldset>
     
-    <button type="submit">Save</button>
+     <button id="savePicture" type="submit">Save</button>
 </form>
       
       
@@ -66,19 +66,19 @@
 
 
 
-<form action="/action_page.php" method="post">
+<form onsubmit="return changePassword();" id="changePasswordForm" enctype='application/json'>
 
     <fieldset>
         <h1>Change Password</h1>
-        <label for="password">Old Password:</label>
-        <input type="password" id="password0" name="user_password">
+        <label id="oldPasswordLabel" for="password">Old Password:</label>
+        <input id="oldPassword" type="password" id="password0" name="user_password">
 
 
-        <label for="password">New Password:</label>
-        <input type="password" id="password" name="user_password">
+        <label id="newPasswordLabel" for="password">New Password:</label>
+        <input id="newPassword" type="password" id="password" name="user_password">
 
-        <label for="password">Retype New Password:</label>
-        <input type="password" id="password2" name="user_password">
+        <label id="retypeNewPasswordLabel" for="password">Retype New Password:</label>
+        <input id="retypeNewPassword" type="password" id="password2" name="user_password">
     </fieldset>
     
     <button type="submit">Save</button>
@@ -90,38 +90,8 @@
 
 
 <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
-  <script>
-$(document).ready(function(){
-$(".account").click(function()
-{
-var X=$(this).attr('id');
-if(X==1)
-{
-$(".submenu").hide();
-$(this).attr('id', '0'); 
-}
-else
-{
-$(".submenu").show();
-$(this).attr('id', '1');
-}
-});
-$(".submenu").mouseup(function()
-{
-return false
-});
-$(".account").mouseup(function()
-{
-return false
-});
-$(document).mouseup(function()
-{
-$(".submenu").hide();
-$(".account").attr('id', '');
-});
-});
-  </script>
-
-
+<script src="js/usermenu.js"></script>
+<script src="js/utils.js"></script>
+<script src="js/myprofile.js"></script>
     </body>
 </html>

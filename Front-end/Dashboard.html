@@ -7,12 +7,20 @@
         <meta charset="UTF-8">
         <title>MeToo</title> 
     </head>
+    <script type="text/javascript">
+      var accessToken = localStorage.getItem("MeTooAccessToken");
+      if(accessToken===null){
+          window.location.replace('Login.html');
+      }
+
+    </script>
     <body class="bgGradient">
       <div >
         <!--dropdown menu-->
           <div class="dropdown">
               <a href="#" class="account" >
-              <img src="assets/UserPhoto.png" alt="SmileyFace" class="profile-circle"/>
+
+              <img id="profilePicture" src="assets/UserPhoto.png" alt="SmileyFace" class="profile-circle"/>
               </a>
               <div class="submenu">
               <ul class="root">
@@ -20,7 +28,7 @@
               <a href="#" >Dashboard</a>
               </li>
               <li >
-              <a href="#" >Profile</a>
+              <a href="MyProfile.html" >Profile</a>
               </li>
               <li >
               <a href="#">Settings</a>
@@ -32,8 +40,8 @@
               </div>
               </div>
 
-      <img class="imag" alt="SmileyFace" src="assets/logo.png">   
-      <input type="text" class="search" name="search" placeholder="Search..">
+      <img onclick="window.location.replace('Dashboard.html')"  class="imag" alt="SmileyFace" src="assets/logo.png">   
+      <input type="text" id="search" class="search" name="search" placeholder="Search..">
           
       </div>
       <br>
@@ -56,48 +64,21 @@
             <th>Location</th>
             <th>Room ocupation</th>
             <th>Owner</th>
+            <th style="display: block;" id="deleteCollumn"></th>
           </tr>
           
           
         </table>
 
 
-<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
-  <script>
-$(document).ready(function(){
-$(".account").click(function()
-{
-var X=$(this).attr('id');
-if(X==1)
-{
-$(".submenu").hide();
-$(this).attr('id', '0'); 
-}
-else
-{
-$(".submenu").show();
-$(this).attr('id', '1');
-}
-});
-$(".submenu").mouseup(function()
-{
-return false
-});
-$(".account").mouseup(function()
-{
-return false
-});
-$(document).mouseup(function()
-{
-$(".submenu").hide();
-$(".account").attr('id', '');
-});
-});
-  </script>
+
+
 
 
     </body>
+<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script src="js/usermenu.js"></script>
 <script src="js/utils.js"></script>
 <script src="js/dashboard.js"></script>
 

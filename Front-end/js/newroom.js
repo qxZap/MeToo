@@ -61,7 +61,6 @@ function newRoom(){
 		        	"title":title,
 		        	"link":link
 		        };	
-				localStorage.setItem("toAdd",JSON.stringify(toAdd));
 		        window.location.replace('Dashboard.html');
 		    }
 		};

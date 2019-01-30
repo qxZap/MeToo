@@ -8,6 +8,13 @@
     <meta charset="UTF-8">
 
 </head>
+<script type="text/javascript">
+      var accessToken = localStorage.getItem("MeTooAccessToken");
+      if(accessToken===null){
+          window.location.replace('Login.html');
+      }
+
+    </script>
 <body class="bgGradient">
 <img class="imag" alt="Smiley face" src="assets/logo.png">
 <div id="superDiv" syle="display: none">

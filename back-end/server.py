@@ -9,9 +9,13 @@ import smtplib
 from email.mime.text import MIMEText
 import uuid
 import math
+import os
 app = Flask(__name__)
 api = Api(app)
 CORS(app, supports_credentials=True)
+UPLOAD_FOLDER = os.path.basename('resources')
+ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'])
+
 
 
 accessDB = mysql.connector.connect(
@@ -200,6 +204,8 @@ def login(username,password):
     fetched = mycursor.fetchall()
     newToken = newAccessToken(username)
     print(fetched)
+    if len(fetched)<1:
+        return 2,0
     if fetched[0][1]==0:
         return 3,0
     if len(fetched)==0:
@@ -331,6 +337,7 @@ def getMyRooms(accessToken):
 @app.route('/rooms/<float:range>/<float:lat>/<float:lon>',methods=['GET'])
 @cross_origin(origin="*") 
 def getRoomsInRange(range,lat,lon):
+    global accessDB
     reconnectDB(access=True)
     sql = "SELECT * FROM rooms"
     mycursor = roomsDB.cursor(buffered=True)
@@ -357,6 +364,137 @@ def getRoomsInRange(range,lat,lon):
             toReturn.append(room)
     return jsonify(rooms=toReturn),200
 
+@app.route('/rooms/get/<string:roomID>',methods=['GET'])
+@cross_origin(origin="*") 
+def getRoom(roomID):
+    global roomsDB
+    reconnectDB(rooms=True)
+    sql = "SELECT * FROM rooms where roomID='"+roomID+"'"
+
+
+@app.route('/rooms/search/<float:range>/<float:lat>/<float:lon>',methods=['POST'])
+@cross_origin(origin="*")
+def seachRooms(range,lat,lon):
+    global roomsDB
+    reconnectDB(rooms=True)
+    content = request.get_json()
+    missing = []
+
+    if 'accessToken' not in content:
+        missing.append('accessToken')
+    if type(range)!=float:
+        missing.append('range')
+    if 'tags' not in content:
+        missing.append('tags')
+    if len(missing)>0:
+        return jsonify(status=False,missing=missing),204
+
+    if hasAccess(content['accessToken']):
+        sql = "SELECT * FROM rooms"
+        mycursor = roomsDB.cursor(buffered=True)
+        mycursor.execute(sql)
+        fetched = mycursor.fetchall()
+        toReturn = []
+        for i in fetched:
+            newGeoLocation = (i[5].decode("UTF-8")).split(' ')
+            lat2 = float(newGeoLocation[0].decode("UTF-8"))
+            lon2 = float(newGeoLocation[1].decode("UTF-8"))
+            if distanceBetween2Points(lat,lon,lat2,lon2)<range and (i[7].decode("UTF-8")).split(',')!=[u'']:
+                counter = 0
+                for j in content['tags']:
+                    if j in (i[7].decode("UTF-8")).split(','):
+                        counter+=1
+                if counter>0:
+                    room = {
+                      "roomID":i[0].decode("UTF-8"),
+                      "owner":i[1].decode("UTF-8"),
+                      "roomName":i[2].decode("UTF-8"),
+                      "lobbySize":i[3], 
+                      "description":i[4].decode("UTF-8"),
+                      "location":i[5].decode("UTF-8"),
+                      "lobby":(i[6].decode("UTF-8")).split(','),
+                      "tags":(i[7].decode("UTF-8")).split(','),
+                      "title":i[8].decode("UTF-8"),
+                      "link":i[9].decode("UTF-8"),
+                      "counter":counter
+                    }    
+                    toReturn.append(room)
+        toReturn = sorted(toReturn,key=lambda x:x['counter'], reverse=True)
+        print(toReturn)
+        return jsonify(rooms=toReturn),200
+
+    else:
+        return jsonify(status=False,notFound=content['accessToken']),404
+
+
+@app.route('/upload/<string:username>/<string:accessToken>', methods=['POST'])
+def upload_file(username,accessToken):
+    global accessDB
+    reconnectDB(access=True)
+    hasAcc = hasAccess(accessToken)
+    if hasAcc==username:
+        file = request.files['image']
+        newFileName=username+'.'+file.filename.split('.')[1]
+        file.save(os.path.join(app.config['UPLOAD_FOLDER'], newFileName))
+        return jsonify(status=True,path=newFileName,link='http://127.0.0.1:8000/'+newFileName,code=200),200
+    else:
+        return jsonify(status=False,code=401
+          ),401
+
+def changePassword(who,password,newPassword):
+    global usersDB
+    reconnectDB(users=True)
+    sql = "UPDATE users SET password='"+newPassword+"' WHERE username='"+who+"' and password='"+password+"'";
+    mycursor = roomsDB.cursor(buffered=True)
+    mycursor.execute(sql)
+    return 0
+
+
+
+
+
+@app.route('/profile/change/password',methods=['POST'])
+@cross_origin(origin="*")
+def changePasswordAPI():
+    content = request.get_json()
+    missing = []
+    if 'username' not in content:
+        missing.append('username')
+    if 'accessToken' not in content:
+        missing.append('accessToken')
+    if 'password' not in content:
+        missing.append('password')
+    if 'newPassword' not in content:
+        missing.append('newPassword')
+    if len(missing)>0:
+        return jsonify(missing=missing),206
+    hasAcc = hasAccess(content['accessToken'])
+    if hasAcc==content['username']:
+        result = changePassword(content['username'],content['password'],content['newPassword'])
+        return jsonify(status=result),200
+
+
+@app.route('/profile/picture/<string:username>/<string:accessToken>',methods=['GET'])
+@cross_origin(origin="*")
+def getProfilePicture(username,accessToken):
+    global accessDB,usersDB
+    reconnectDB(access=True,users=True)
+    hasAcc = hasAccess(accessToken)
+    if hasAcc==username:
+        sql = "SELECT profilePicture FROM users WHERE username='"+username+"'"
+        mycursor = roomsDB.cursor(buffered=True)
+        mycursor.execute(sql)
+        fetched = mycursor.fetchall()
+        print(fetched[0][0])
+        if len(fetched)==0:
+            return jsonify(status=True,url='assets/UserPhoto.png'),200
+        else:
+            return jsonify(status=True,url='http://127.0.0.1:8000/'+fetched[0][0]),200
+
+    else:  
+        return jsonify(status=False,url='Unknown user'),404
+    return jsonify(status=False,url='Error'),404
+
 
 
 @app.route('/new_room',methods=['POST'])
@@ -382,5 +520,5 @@ def newRoomAPIPath():
     else:
         return "wtf?",401
 
-
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 app.run(host='0.0.0.0', port=8090,debug=True)
