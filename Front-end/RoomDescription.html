@@ -2,7 +2,8 @@
 <html lang="en">
     <head>
         <link rel="icon" href="assets/icon.png">    
-        <link rel="stylesheet" type="text/css" href="nou.css">
+        <link rel="stylesheet" type="text/css" href="RoomDescription.css">
+        <link rel="stylesheet" type="text/css" href="comun.css">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta charset="UTF-8">
         <title>MeToo</title>
@@ -13,44 +14,41 @@
             <div class="item1">
                 <nav>
                         <ul class="fancyNav">
-                            <li id="browseTab"><a onclick="loadRooms()" href="#browse">Browse</a></li>
-                            <li id="yourRoomsTab"><a onclick="getMyRooms()" href="#yourrooms">Your Rooms</a></li>
+                            <li id="browseTab"><a  href="Dashboard.html">Browse</a></li>
+                            <li id="yourRoomsTab"><a  href="Dashboard.html">Your Rooms</a></li>
                             <li id="localTab"><a href="#youip">Local</a></li>
                             <li id="newRoomTab"><a href="NewRoom.html">Create Room</a></li>
                             <li id="aboutTab"><a href="#about">About</a></li>
                         </ul>
                 </nav>
+                <input id="search" type="text" class="search" name="search" placeholder="Search..">
             </div>
 
             <div class="item3"><img class="imag" alt="SmileyFace" src="assets/logoMeToo.jpg">  
                 <div class="dropdown">
-                        <img src="assets/UserPhoto.png" alt="SmileyFace"> 
+                        <img id="profilePicture" src="assets/UserPhoto.png" alt="SmileyFace"> 
                         <!-- class="profile-circle"/> -->
                         <div class="dropdown-content">
-                        <a href="#">Dashboard</a>
-                        <a href="#">Profile</a>
+                        <a href="Dashboard.html">Dashboard</a>
+                        <a  href="MyProfile.html">Profile</a>
                         <a href="#">Settings</a>
                          <a onclick="logOut()" href="#">Sign Out</a>
                         </div>
                 </div>
             </div>
                     <div class="container">
-                    <h1>TITLU</h1>
+                    <h1 id="roomName">TITLU</h1>
                     <div class="contineHarta">
-                    <p class="descriere">Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-                        Pellentesque iaculis fermentum mauris, id rutrum diam tempor ut. Nam sit amet posuere purus. Suspendisse dapibus ornare molestie. 
-                        Nullam consequat nibh id elit gravida, id fringilla leo maximus. Pellentesque vel volutpat mauris. Pellentesque at laoreet velit, 
-                        nec ultricies lacus. Quisque aliquam urna in congue porttitor. Class aptent taciti sociosqu ad litora torquent per conubia nostra, 
-                        per inceptos himenaeos. Sed lobortis quam vel lorem vehicula, ac venenatis dui viverra. </p>
+                    <p id="description" class="descriere">texteswrdgtfhvbjmnhgftre43w4rtdfghyftre4w3er4dtfghyjbftdreswq2wea3srzdtfghy bftrdew3ersdtfgh
+                            texteswrdgtfhvbjmnhgftre43w4rtdfghyftre4w3er4dtfghyjbftdreswq2wea3srzdtfghy bftrdew3ersdtfghtexteswrdgtfhvbjmnhgftre43w4rtdfghyftre4w3er4dtfghyjbftdreswq2wea3srzdtfghy bftrdew3ersdtfgh
+                            texteswrdgtfhvbjmnhgftre43w4rtdfghyftre4w3er4dtfghyjbftdreswq2wea3srzdtfghy bftrdew3ersdtfgh
+                            texteswrdgtfhvbjmnhgftre43w4rtdfghyftre4w3er4dtfghyjbftdreswq2wea3srzdtfghy bftrdew3ersdtfgh    
+                    </p>
                         
-                        <div class="harta"  id="googleMap" style="width:40%;height:200px;"></div>
+                        <div class="harta"  id="map"></div>
                     </div>
-                    <div class="cuPhoto">
-                    <p class="altaDescriere">Lobby: </p>
-                    <img class="photo" src="assets/UserPhoto.png" alt="SmileyFace"> 
-                    <img class="photo" src="assets/UserPhoto.png" alt="SmileyFace"> 
-                    <img class="photo" src="assets/UserPhoto.png" alt="SmileyFace"> 
-                    <img class="photo" src="assets/UserPhoto.png" alt="SmileyFace"> 
+                    <div id="lobby" class="cuPhoto">
+                    <p id="lobby_size" class="altaDescriere">Lobby: 2/5</p>
                     <img class="photo" src="assets/UserPhoto.png" alt="SmileyFace"> 
                     <img class="photo" src="assets/UserPhoto.png" alt="SmileyFace"> 
                     <p class="altaDescriere" style="padding-left: 2%">Link: </p>
@@ -58,9 +56,7 @@
                     </div>
                     <br>
                     <div class= "buton">
-                    <button type="button" >Join!</button>
-                    <button type="button" >Leave!</button>
-                    <button type="button" >Full Room</button>
+                    <button id="actionButton"  onclick="action()" type="button" >Join!</button>
 
                     </div>
                     </div>
@@ -70,16 +66,29 @@
         </div>
     </body>
     
-    <script>
-            function myMap() {
-            var mapProp= {
-              center:new google.maps.LatLng(51.508742,-0.120850),
-              zoom:5,
-            };
-            var map = new google.maps.Map(document.getElementById("googleMap"),mapProp);
-            }
+             <script>
+            function initMap() {
+                var myLatLng = {lat: 47.164352799999996, lng: 27.599058399999997};
+
+                var map = new google.maps.Map(document.getElementById('map'), {
+                  zoom: 17,
+                  center: myLatLng
+                });
+
+                var marker = new google.maps.Marker({
+                  position: myLatLng,
+                  map: map,
+                  title: 'Hello World!'
+                });
+              }
             </script>
             
-            <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY&callback=myMap"></script>
+            <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCmAPirfLXmN9as4r7XZJ_wbQwwrn9dICw&callback=initMap" async defer></script> 
+            <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+            <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/push.js/1.0.5/push.js"></script>
+            <script src="js/roomDescription.js"></script>
+            <script src="js/usermenu.js"></script>
+            <script src="js/utils.js"></script>
 
     </html>
