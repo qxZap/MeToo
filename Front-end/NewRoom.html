@@ -11,8 +11,18 @@
     <meta charset="UTF-8">
 
 </head>
-<body class="bgGradient">
+<body>
 <img class="imag" alt="Smiley face" src="assets/logoMeToo.jpg">
+<div class="dropdown">
+        <img id="profilePicture" src="assets/UserPhoto.png" alt="SmileyFace"> 
+        <!-- class="profile-circle"/> -->
+        <div class="dropdown-content">
+        <a href="Dashboard.html">Dashboard</a>
+        <a  href="MyProfile.html">Profile</a>
+        <a href="#">Settings</a>
+         <a onclick="logOut()" href="#">Sign Out</a>
+        </div>
+</div>
 <div id="superDiv" syle="display: none">
 
 <form onsubmit="return newRoom();" id="newRoomForm" enctype='application/json'>
