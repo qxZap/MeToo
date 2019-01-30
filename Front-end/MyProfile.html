@@ -3,49 +3,38 @@
     <head>
         <link rel="icon" href="assets/icon.png">    
         <link rel="stylesheet" type="text/css" href="MyProfile.css">
+        <link rel="stylesheet" type="text/css" href="comun.css">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Lobster" />
         <meta charset="UTF-8">
         <title>MeToo</title> 
     </head>
-    <body class="bgGradient">
-        
-      <div class="logoSearch">
-        <!--dropdown menu-->
-          <div class="dropdown">
-              <a href="#" class="account" >
-              <img id="profilePicture" src="assets/UserPhoto.png" alt="Smiley face" class="profile-circle"/>
-              </a>
-              <div class="submenu">
-              <ul class="root">
-              <li >
-              <a href="Dashboard.html" >Dashboard</a>
-              </li>
-              <li >
-              <a href="MyProfile.html" >Profile</a>
-              </li>
-              <li >
-              <a href="Settings.html">Settings</a>
-              </li>
-              <li>
-              <a href="SingOut.html">Sign Out</a>
-              </li>
-              </ul>
-              </div>
-              </div>
-      <img href="Dashboard.html" class="imag" alt="Smiley face" src="assets/logo.png">  
+    <body>
+        <!-- <img class="imag" alt="SmileyFace" src="assets/logoMeToo.jpg">   -->
+        <div class="dropdown">
+                <img id="profilePicture" src="assets/UserPhoto.png" alt="SmileyFace"> 
+                <!-- class="profile-circle"/> -->
+                <div class="dropdown-content">
+                <a href="Dashboard.html">Dashboard</a>
+                <a  href="MyProfile.html">Profile</a>
+                <a href="#">Settings</a>
+                 <a onclick="logOut()" href="#">Sign Out</a>
+                </div>
+        </div>
+      <img class="imag" alt="Smiley face" src="assets/logo.png">  
       </div>
       
       
       
-      <form onsubmit="return changePicture();" id="pictureForm" enctype = 'multipart/form-data'>
+      <form action="/action_page.php"  method="post">
 
-        <fieldset>
+    <fieldset>
 
-            <label id="pictureLabel" for="picture">New Profile picture:</label>
-            <input id="picture" type="file" id="picture" name="pic" accept="image/*">
-        </fieldset>
+        <label for="picture">New Profile picture</label>
+        <input type="file" id="picture" name="pic" accept="image/*">
+    </fieldset>
     
-     <button id="savePicture" type="submit">Save</button>
+    <button type="submit">Save</button>
 </form>
       
       
@@ -66,19 +55,19 @@
 
 
 
-<form onsubmit="return changePassword();" id="changePasswordForm" enctype='application/json'>
+<form action="/action_page.php" method="post">
 
     <fieldset>
         <h1>Change Password</h1>
-        <label id="oldPasswordLabel" for="password">Old Password:</label>
-        <input id="oldPassword" type="password" id="password0" name="user_password">
+        <label for="password">Old Password:</label>
+        <input type="password" id="password0" name="user_password">
 
 
-        <label id="newPasswordLabel" for="password">New Password:</label>
-        <input id="newPassword" type="password" id="password" name="user_password">
+        <label for="password">New Password:</label>
+        <input type="password" id="password" name="user_password">
 
-        <label id="retypeNewPasswordLabel" for="password">Retype New Password:</label>
-        <input id="retypeNewPassword" type="password" id="password2" name="user_password">
+        <label for="password">Retype New Password:</label>
+        <input type="password" id="password2" name="user_password">
     </fieldset>
     
     <button type="submit">Save</button>
@@ -90,8 +79,38 @@
 
 
 <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
-<script src="js/usermenu.js"></script>
-<script src="js/utils.js"></script>
-<script src="js/myprofile.js"></script>
+  <script>
+$(document).ready(function(){
+$(".account").click(function()
+{
+var X=$(this).attr('id');
+if(X==1)
+{
+$(".submenu").hide();
+$(this).attr('id', '0'); 
+}
+else
+{
+$(".submenu").show();
+$(this).attr('id', '1');
+}
+});
+$(".submenu").mouseup(function()
+{
+return false
+});
+$(".account").mouseup(function()
+{
+return false
+});
+$(document).mouseup(function()
+{
+$(".submenu").hide();
+$(".account").attr('id', '');
+});
+});
+  </script>
+
+
     </body>
 </html>
