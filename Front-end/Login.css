@@ -28,8 +28,6 @@
     }
   }
   
-  
-  
   table {
     width: 80vw;
     text-align: center;
@@ -47,7 +45,6 @@
     padding: 8px;
   
   }
-  
   
   th {
     background-color: rgb(32, 140, 173);
@@ -117,17 +114,20 @@
   }
   
   input[type=submit] {
-    background-color: #1DB2E1;
-    color: white;
-    padding: 13px 22px;
-    border: none;
-    border-radius: 4px;
     cursor: pointer;
-    margin-left:40%;
+    font: 25px/1 Lobster,Arial,sans-serif;
+    background: lightgray;
+    color: rgb(82, 81, 81);
+    height: 4vw;
+    width: 16vw;
+    text-align: center;
+    margin-left: 25%;
+    font-size: 3vw;
+    border-radius: 10px;
   }
   
   input[type=submit]:hover {
-    background-color: #1DB2E4;
+    background-color: rgba(145, 143, 143, 0.651);
   }
   
   body {
