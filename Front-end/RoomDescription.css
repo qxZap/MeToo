@@ -1,43 +1,22 @@
-.imag {
-    height:6vw;
-    width:7vw;
-    margin-top: 0px;
-    margin-right: 0vw;
-    padding-top:0;
-    padding-right: 57vw;
-}
-
 .item3{
     padding-left: 15vw;
     display: inline-flex;
 }
 
 /* grid 1 */
-
-body {
-    background-image: url("assets/background.jpg");
-   }
-
 .grid-container {
   display: grid;
   grid-template: 10vw;
-  /* grid-row-gap: 10px; */
   padding: 0;
-  /* text-align: center; */
 }
 
 .grid-container > div.item1{
-    /* text-align: center; */
-    /* padding-left: 15vw; */
-    /* font-size: 30px; */
     display: inline;
     text-align: center;
 }
 
 .grid-container > div.tbl-header {
-    /* text-align: center; */
     padding: 0 0;
-    /* font-size: 30px; */
     display: inline;
     text-align: center;
 }
@@ -58,11 +37,6 @@ body {
 }
 
 .fancyNav li{
-    /* background-image: linear-gradient(to right, #989898, #9d9d9d, #a3a3a3, #a8a8a8, #aeaeae); */
-    /* background-image: linear-gradient(to right, #76abf9, #7eaaf9, #86a9f8, #8ea7f7, #95a6f6); */
-
-    /* background-image: linear-gradient(to right, #6597e0, #789fe6, #8aa7ec, #9aaff2, #aab7f8); */
-
     background-image: linear-gradient(to right, #608ccb, #7799d7, #8da6e2, #a2b3ee, #b6c1f9);
 
     border-right: 0.2px solid rgba(237, 241, 241, 0.932);
@@ -175,20 +149,6 @@ body {
     text-decoration:none !important;
     white-space:nowrap;
 }
-/* 
-.fancyNav a.homeIcon{
-    background:url('../img/home.png') no-repeat center center; */
-    /* display: inline;
-    overflow: hidden;
-    padding-left: 12px;
-    padding-right: 12px;
-    text-indent: -9999px;
-    width: 16px;
-} */
-    
-/* .item1 {
-    text-align: center;
-} */
 
 input[type=text].search {
     width:16%;
@@ -200,7 +160,6 @@ input[type=text].search {
     background-position: 10px 6px; 
     background-repeat: no-repeat;
     transition: width 0.4s ease-in-out;
-    /* margin-left: 0; */
     border-radius:6px;
 }
 
@@ -265,14 +224,11 @@ input[type=submit]:hover {
 
 
 .container {
-    /* position: relative; */
     text-align: center;
     border-radius: 5px;
     top: 13vw;
     padding: 20px;
     background-color: rgba(185, 185, 185, 0.274);
-    /* padding-left: 15vw;
-    padding-right: 15vw; */
     margin-left: 15vw;
     margin-right: 15vw;
     text-align: center;
@@ -286,8 +242,11 @@ h1{
 .descriere{
     font: 25px/1 Lobster,Arial,sans-serif;
     color: rgb(82, 81, 81);
-    width: 50%;
-    padding-right: 5%;
+    width: 40%;
+    padding-right:0;
+    margin-right: 10%;
+    text-align: center;
+    display: flex;
 }
 
 .altaDescriere{
@@ -297,16 +256,24 @@ h1{
 }
 
 .harta{
+    position: relative;
     padding-top: 15%;
+    padding-left: 10%;
+    margin-left: 5%;
+    padding-right: 0;
+    width: 80%;
+    height: 300px;
 }
 
 .contineHarta{
-    display: inline-flex;
+    display: inline;
+    text-align: center;
 }
 
 .cuPhoto{
-    display: flex;
+    display: inline-flex;
     text-align: center;
+    padding-left: 30%;
 }
 
 .photo{
@@ -319,6 +286,7 @@ h1{
 
 .buton{
     text-align: center;
+    padding-top: 3%;
 }
 
 button{
