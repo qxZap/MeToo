@@ -4,7 +4,7 @@ if(localStorage.getItem("profilePictureLink")){
 }
 else{
 		var xhr = new XMLHttpRequest();
-		var url = "http://127.0.0.1:8090/profile/picture/"+localStorage.getItem("username")+'/'+localStorage.getItem("MeTooAccessToken");
+		var url = "http://127.0.0.1:8090/profile/picture/"+localStorage.getItem("username");
 		xhr.open("GET", url, true);
 		xhr.setRequestHeader("Content-Type", "application/json");
 		xhr.onreadystatechange = function () {

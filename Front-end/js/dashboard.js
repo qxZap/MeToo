@@ -140,10 +140,28 @@ function areTheSame(a,b){
 }
 
 function notify(room){
+  var iconNotification = 'assets/notification.png';
+  var xhr = new XMLHttpRequest();
+    var url = "http://127.0.0.1:8090/profile/picture/"+room['owner'];
+    xhr.open("GET", url, false);
+    xhr.setRequestHeader("Content-Type", "application/json");
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            var json = JSON.parse(xhr.responseText);
+            if(json['status'])
+              if(json['url']!='http://127.0.0.1:8000/def.png'){
+                  iconNotification = json['url'];
+              }   
+            }
+    };
+    xhr.send(null);
+
+
+
   var title = room['owner']+' just open a room near you';
   var en = new Notification(title, { 
         body: 'MeToo: '+room['roomName'],
-        icon: 'assets/notification.png',
+        icon: iconNotification,
         sound: '/assets/sounds/notification.mp3'
       }).onclick = function(event) {
         event.preventDefault();
