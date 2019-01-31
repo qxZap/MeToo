@@ -1,0 +1,16 @@
+.imag {
+    height:6vw;
+    width:7vw;
+    margin-top: 0px;
+    margin-right: 0vw;
+    padding-top:0;
+    padding-right: 57vw;
+}
+body {
+    background-image: url("assets/background.jpg");
+   }
+
+.boldit{
+    font-weight: bold;
+    font-weight: 600px;
+}

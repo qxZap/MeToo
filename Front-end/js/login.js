@@ -31,6 +31,7 @@ function login(){
 		    if (xhr.readyState === 4 && xhr.status === 211) {
 		        var json = JSON.parse(xhr.responseText);
 		        localStorage.setItem("MeTooAccessToken",json['accessToken']);
+		        localStorage.setItem("profilePictureLink",json['profilePicture']);
 		        window.location.replace('Dashboard.html');
 		    }
 		    if (xhr.status === 212){

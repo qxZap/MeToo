@@ -2,7 +2,8 @@
 <html lang="en">
     <head>
         <link rel="icon" href="assets/icon.png">    
-        <link rel="stylesheet" type="text/css" href="nou.css">
+        <link rel="stylesheet" type="text/css" href="Dashboard.css">
+        <link rel="stylesheet" type="text/css" href="comun.css">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta charset="UTF-8">
         <title>MeToo</title>
@@ -13,28 +14,26 @@
             <div class="item1">
                 <nav>
                         <ul class="fancyNav">
-                            <!-- <li id="home"><a href="#home" class="homeIcon">Home</a></li> -->
-                            <li id="browseTab"><a onclick="loadRooms()" href="#browse">Browse</a></li>
-                            <li id="yourRoomsTab"><a onclick="getMyRooms()" href="#yourrooms">Your Rooms</a></li>
+                            <li id="browseTab"><a onclick="loadRooms()" href="#">Browse</a></li>
+                            <li id="yourRoomsTab"><a onclick="getMyRooms()" href="#">Your Rooms</a></li>
                             <li id="localTab"><a href="#youip">Local</a></li>
                             <li id="newRoomTab"><a href="NewRoom.html">Create Room</a></li>
                             <li id="aboutTab"><a href="#about">About</a></li>
-                            <!-- <li id="empty"><a>..............................................................................</a></li> -->
                         </ul>
                 </nav>
                 <br>
-                <input type="text" class="search" name="search" placeholder="Search..">
+                <input id="search" type="text" class="search" name="search" placeholder="Search..">
             </div>
 
             <div class="item3"><img class="imag" alt="SmileyFace" src="assets/logoMeToo.jpg">  
                 <div class="dropdown">
-                        <img src="assets/UserPhoto.png" alt="SmileyFace"> 
+                        <img id="profilePicture" src="assets/UserPhoto.png" alt="SmileyFace"> 
                         <!-- class="profile-circle"/> -->
                         <div class="dropdown-content">
-                        <a href="#">Dashboard</a>
-                        <a href="#">Profile</a>
+                        <a href="Dashboard.html" >Dashboard</a>
+                        <a href="MyProfile.html" >Profile</a>
                         <a href="#">Settings</a>
-                         <a onclick="logOut()" href="#">Sign Out</a>
+                         <a onclick="logOut()">Sign Out</a>
                         </div>
                 </div>
                 <br>
@@ -52,18 +51,6 @@
                             </tr>
                         </thead>
                     </table>
-                    <div class="tbl-content">
-                        <table cellpadding="0" cellspacing="0" border="0">
-                          <tbody>
-                            <tr>
-                              <td>AAC</td>
-                              <td>AUSTRALIAN COMPANY </td>
-                              <td>$1.38</td>
-                              <td>+2.01</td>
-                            </tr>
-                          </tbody>                    
-                         </table>
-                    </div>
                 </div>
 
                 <div class="item5"><br></div>
@@ -73,41 +60,12 @@
         </div>
         
 <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
-  <script>
-$(document).ready(function(){
-$(".account").click(function()
-{
-var X=$(this).attr('id');
-if(X==1)
-{
-$(".submenu").hide();
-$(this).attr('id', '0'); 
-}
-else
-{
-$(".submenu").show();
-$(this).attr('id', '1');
-}
-});
-$(".submenu").mouseup(function()
-{
-return false
-});
-$(".account").mouseup(function()
-{
-return false
-});
-$(document).mouseup(function()
-{
-$(".submenu").hide();
-$(".account").attr('id', '');
-});
-});
-  </script>
 
 
     </body>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/push.js/1.0.5/push.js"></script>
+    <script src="js/usermenu.js"></script>
     <script src="js/utils.js"></script>
     <script src="js/dashboard.js"></script>
     

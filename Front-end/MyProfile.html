@@ -3,36 +3,25 @@
     <head>
         <link rel="icon" href="assets/icon.png">    
         <link rel="stylesheet" type="text/css" href="MyProfile.css">
+        <link rel="stylesheet" type="text/css" href="comun.css">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Lobster" />
         <meta charset="UTF-8">
         <title>MeToo</title> 
     </head>
-    <body class="bgGradient">
-        
-      <div class="logoSearch">
-        <!--dropdown menu-->
-          <div class="dropdown">
-              <a href="#" class="account" >
-              <img id="profilePicture" src="assets/UserPhoto.png" alt="Smiley face" class="profile-circle"/>
-              </a>
-              <div class="submenu">
-              <ul class="root">
-              <li >
-              <a href="Dashboard.html" >Dashboard</a>
-              </li>
-              <li >
-              <a href="MyProfile.html" >Profile</a>
-              </li>
-              <li >
-              <a href="Settings.html">Settings</a>
-              </li>
-              <li>
-              <a href="SingOut.html">Sign Out</a>
-              </li>
-              </ul>
-              </div>
-              </div>
-      <img href="Dashboard.html" class="imag" alt="Smiley face" src="assets/logo.png">  
+    <body>
+        <!-- <img class="imag" alt="SmileyFace" src="assets/logoMeToo.jpg">   -->
+        <div class="dropdown">
+                <img id="profilePicture" src="assets/UserPhoto.png" alt="SmileyFace"> 
+                <!-- class="profile-circle"/> -->
+                <div class="dropdown-content">
+                <a href="Dashboard.html">Dashboard</a>
+                <a  href="MyProfile.html">Profile</a>
+                <a href="#">Settings</a>
+                 <a onclick="logOut()" href="#">Sign Out</a>
+                </div>
+        </div>
+      <img class="imag" alt="Smiley face" src="assets/logo.png">  
       </div>
       
       
@@ -46,23 +35,23 @@
         </fieldset>
     
      <button id="savePicture" type="submit">Save</button>
-</form>
+      </form>
       
       
       
       
       
-      <form action="/action_page.php" method="post">
+       <form action="/action_page.php" method="post">
 
-    <fieldset>
-        <h1>Change Email</h1>
+        <fieldset>
+            <h1>Change Email</h1>
 
-        <label for="mail">New Email:</label>
-        <input type="email" id="mail" name="user_email">
-    </fieldset>
-    
-    <button type="submit">Save</button>
-</form>
+            <label for="mail">New Email:</label>
+            <input type="email" id="mail" name="user_email">
+        </fieldset>
+        
+        <button type="submit">Save</button>
+    </form>
 
 
 
@@ -83,7 +72,6 @@
     
     <button type="submit">Save</button>
 </form>
-      
         
 
           
@@ -93,5 +81,6 @@
 <script src="js/usermenu.js"></script>
 <script src="js/utils.js"></script>
 <script src="js/myprofile.js"></script>
+
     </body>
 </html>

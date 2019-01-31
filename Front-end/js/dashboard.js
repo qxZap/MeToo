@@ -111,7 +111,7 @@ function getMyRooms(){
 
 
 function getRooms(lat,lon){
-    var range = 300.1;
+    var range = 10.1;
     localStorage.setItem("userLat",lat);
     localStorage.setItem("userLon",lon);
     //if(hasAccess(localStorage.getItem("MeTooAccessToken"))!=false){
@@ -128,8 +128,81 @@ function getRooms(lat,lon){
           }
       };    
       xhr.send(null);
-    
+}
 
+function areTheSame(a,b){
+  a = a.toString();
+  b = b.toString();
+  if(a===b)
+    return true;
+
+  return false;
+}
+
+function notify(room){
+  var title = room['owner']+' just open a room near you';
+  var en = new Notification(title, { 
+        body: 'MeToo: '+room['roomName'],
+        icon: 'assets/notification.png',
+        sound: '/assets/sounds/notification.mp3'
+      }).onclick = function(event) {
+        event.preventDefault();
+        localStorage.setItem("roomToLoad",room['roomID']);
+        window.location.replace("RoomDescription.html");
+      };
+      en.onshow = function() { setTimeout(en.close, 4000) };
+}
+
+
+function getRoomIds(rooms){
+  var toReturn = [];
+  rooms['rooms'].forEach(function(room){
+      toReturn.push(room['roomID']);
+  });
+  return toReturn;
+}
+
+function getNewerRooms(newRooms,oldRooms){
+  var toReturn = [];
+  newRooms.forEach(function(id){
+    if(!(oldRooms.includes(id)))
+      toReturn.push(id);
+    
+  });
+  return toReturn;
+}
+
+function getRoomsInRange(range,lat,lon){
+    localStorage.setItem("userLat",lat);
+    localStorage.setItem("userLon",lon);
+      var xhr = new XMLHttpRequest();
+      var url = "http://127.0.0.1:8090/rooms/"+range+"/"+lat+"/"+lon;
+      xhr.open("GET", url, true);
+      xhr.setRequestHeader("Content-Type", "application/json");
+      xhr.onreadystatechange = function () {
+          if (xhr.readyState === 4 && xhr.status === 200) {
+              var json = JSON.parse(xhr.responseText);
+              var localItems = localStorage.getItem("checkNewRooms");
+
+              if(!areTheSame(JSON.stringify(json),localItems)){
+                var newRooms = getRoomIds(json);
+                var oldRooms = getRoomIds(JSON.parse(localStorage.getItem("checkNewRooms")));
+                var newerRooms = getNewerRooms(newRooms,oldRooms);
+                newRooms = [];
+                newerRooms.forEach(function(id){
+                    json['rooms'].forEach(function(room){
+                        if(room['roomID']===id && room['owner']!=localStorage.getItem("username")){
+                            notify(room);
+                        } 
+                    });
+                });
+
+                localStorage.setItem("checkNewRooms",JSON.stringify(json));
+              }
+              
+          }
+      };    
+      xhr.send(null);
 }
 
 function setPositions(position){
@@ -151,24 +224,42 @@ function getLocation(){
     }
     else{
       getRooms(localStorage.getItem("userLat"),localStorage.getItem("userLon"));
+      sendLocation();
+
     }
 }
 
-function deleteRoom(roomID){
-  var accessToken = localStorage.getItem("MeTooAccessToken");
-  var xhr = new XMLHttpRequest();
-      var url = "http://127.0.0.1:8090/rooms/delete/"+roomID;
-      xhr.open("DELETE", url, true);
+function sendLocation(){
+      var xhr = new XMLHttpRequest();
+      var url = "http://127.0.0.1:8090/iamhere"
+      xhr.open("POST", url, true);
       xhr.setRequestHeader("Content-Type", "application/json");
       xhr.onreadystatechange = function () {
           if (xhr.readyState === 4 && xhr.status === 200) {
               var json = JSON.parse(xhr.responseText);
           }
+      };    
+      var data = JSON.stringify({"accessToken": localStorage.getItem("MeTooAccessToken"),"lat":localStorage.getItem("userLat"),"lon":localStorage.getItem("userLon")});  
+      xhr.send(data);
+}
+
+function deleteRoom(roomID){
+  var accessToken = localStorage.getItem("MeTooAccessToken");
+  var xhr = new XMLHttpRequest();
+      var url = "http://127.0.0.1:8090/rooms/delete/"+roomID+"/"+accessToken;
+      xhr.open("DELETE", url, true);
+      xhr.setRequestHeader("Content-Type", "application/json");
+      xhr.onreadystatechange = function () {
+          if (xhr.readyState === 4 && xhr.status === 200) {
+              var json = JSON.parse(xhr.responseText);
+              document.getElementById(roomID).remove();
+          }
       };
-      var data = JSON.stringify({"accessToken": accessToken});   
-      xhr.send(data);}
+      xhr.send(null);}
 
 function printRoom(yourRooms,roomID,roomName,location,lobby,lobbySize,owner,title,link){
+  if(lobby==undefined)
+      return 0;
   var roomOcupation = String(lobby.length)+"/"+String(lobbySize);
   //console.log(roomName,location,roomOcupation,owner);
   if(link===""||link===null){
@@ -176,18 +267,20 @@ function printRoom(yourRooms,roomID,roomName,location,lobby,lobbySize,owner,titl
   }
   table = document.getElementById('listedRooms');
   if(yourRooms)
-    table.innerHTML +=`
-    <tr>
-      <td>`+roomName+`</td>
+    {
+      table.innerHTML +=`
+    <tr id="`+roomID+`"">
+      <td onclick='openRoom("`+roomID+`")' >`+roomName+`</td>
         <td onclick='window.open("`+link+`")' ><img class="location" alt="SmileyFace" src="assets/location.png">`+title+`</td>
         <td>`+roomOcupation+`</td>
         <td>`+owner+`</td>
         <td><img class="location" style="width: auto;" alt="SmileyFace" src="assets/delete.png" onclick='deleteRoom("`+roomID+`")' ></td>
     </tr>`;
+    }
     else{
       table.innerHTML +=`
-    <tr>
-      <td>`+roomName+`</td>
+    <tr id="`+roomID+`"">
+      <td onclick='openRoom("`+roomID+`")' >`+roomName+`</td>
         <td onclick='window.open("`+link+`")' ><img class="location" alt="SmileyFace" src="assets/location.png">`+title+`</td>
         <td>`+roomOcupation+`</td>
         <td>`+owner+`</td>
@@ -196,15 +289,23 @@ function printRoom(yourRooms,roomID,roomName,location,lobby,lobbySize,owner,titl
   
 }
 
-// <tr onclick='window.open("http://www.google.com")'> 
-//              <td>C++ Board Game</td>  
-//              <td><img class="location" alt="SmileyFace" src="assets/location.png">  Mama Mia</td> 
-//             <td>2/3</td>  
-//             <td>Radozaur</td> 
-//           </tr>
+
+
+Notification.requestPermission(function (status) {
+      if (Notification.permission !== status) {
+        Notification.permission = status;
+      }
+      if (Notification.permission === 'granted') {
+        console.log("granted");
+      } else {
+        console.log(status);
+      }
+    });
+
 
 
 function listRooms(yourRooms=false){
+
   var obj = getFromLocal("MeTooRooms");
   for(var iterator in obj['rooms']){
     var room = obj['rooms'][iterator];
@@ -220,21 +321,11 @@ function listRooms(yourRooms=false){
 
 }
 
-function logOut(){
-      var xhr = new XMLHttpRequest();
-      var url = "http://127.0.0.1:8090/deleteme/"+localStorage.getItem("MeTooAccessToken");
-      xhr.open("DELETE", url, true);
-      xhr.setRequestHeader("Content-Type", "application/json");
-      xhr.onreadystatechange = function () {
-          if (xhr.readyState === 4 && xhr.status === 200) {
-              var json = JSON.parse(xhr.responseText);
-              localStorage.removeItem("MeTooAccessToken");
-              window.location.replace('Login.html')
-          }
-      };    
-      xhr.send(null);
-  ;
+function openRoom(roomID){
+  localStorage.setItem("roomToLoad",roomID);
+  window.location.replace("RoomDescription.html");
 }
+
 
 function loadRooms(){
   getLocation();
@@ -254,8 +345,8 @@ function kickIfForegin(){
         if (xhr.readyState === 4 && xhr.status === 200) {
             var json = JSON.parse(xhr.responseText);
             if(json['username']==false){
-                window.location.replace('Login.html');
                 localStorage.removeItem("MeTooAccessToken");
+                window.location.replace('Login.html');
             }
             else{
                 localStorage.setItem("username",json['username']);
@@ -271,3 +362,9 @@ function kickIfForegin(){
 
 kickIfForegin();
 loadRooms();
+
+
+window.setInterval(function checkVars(){
+  getRoomsInRange(10.1,localStorage.getItem("userLat"),localStorage.getItem("userLon"));
+
+},5000);

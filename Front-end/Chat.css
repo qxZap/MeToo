@@ -1,28 +1,50 @@
+.imag {
+    height:6vw;
+    width:7vw;
+    margin-top: 0px;
+    margin-right: 0vw;
+    /* float: left; */
+    padding-top:0;
+    padding-right: 57vw;
+}
+
 .item3{
     padding-left: 15vw;
     display: inline-flex;
 }
 
 /* grid 1 */
+
+body {
+    background-image: url("assets/background.jpg");
+   }
+
 .grid-container {
   display: grid;
   grid-template: 10vw;
+  /* grid-row-gap: 10px; */
   padding: 0;
+  /* text-align: center; */
 }
 
 .grid-container > div.item1{
+    /* text-align: center; */
     padding-left: 15vw;
+    /* font-size: 30px; */
     display: inline-flex;
     text-align: center;
 }
 
 .grid-container > div.tbl-header {
+    /* text-align: center; */
     padding: 0 0;
+    /* font-size: 30px; */
     display: inline;
     text-align: center;
 }
 
 .fancyNav{
+    /* Affects the UL element */
     overflow: hidden;
     display: inline-block;
     margin-top: 0;
@@ -32,22 +54,34 @@
 }
 
 .fancyNav li{
+    /* background-image: linear-gradient(to right, #989898, #9d9d9d, #a3a3a3, #a8a8a8, #aeaeae); */
+    /* background-image: linear-gradient(to right, #76abf9, #7eaaf9, #86a9f8, #8ea7f7, #95a6f6); */
+
+    /* background-image: linear-gradient(to right, #6597e0, #789fe6, #8aa7ec, #9aaff2, #aab7f8); */
 
     background-image: linear-gradient(to right, #608ccb, #7799d7, #8da6e2, #a2b3ee, #b6c1f9);
+
     border-right: 0.2px solid rgba(237, 241, 241, 0.932);
     border-left: 0.2px solid rgba(237, 241, 241, 0.932);
+
+    /* Adding a 1px inset highlight for a more polished efect: */
 
     box-shadow: 1px -1px 0 rgba(255, 255, 255, 0.6) inset;
     -moz-box-shadow: 1px -1px 0 rgba(255, 255, 255, 0.6) inset;
     -webkit-box-shadow: 1px -1px 0 rgba(255, 255, 255, 0.6) inset;
 
     position:relative;
+
+    /* float: left; */
     display: inline-block;
+    /* text-align: center; */
     list-style: none;
 }
 
 
 .fancyNav li:after{
+
+    /* This creates a pseudo element inslide each LI */ 
     white-space:nowrap;
     content:'.';
     text-indent:-9999px;
@@ -94,6 +128,8 @@
 .fancyNav li:last-child{
     border-radius: 0 4px 4px 0;
 }
+
+/* Treating the last LI and li:after elements separately */
 
 .fancyNav li:last-child:after,
 .fancyNav li.selected:last-child:after{
@@ -146,6 +182,7 @@ input[type=text].search {
     background-position: 10px 6px; 
     background-repeat: no-repeat;
     transition: width 0.4s ease-in-out;
+    /* margin-left: 0; */
     border-radius:6px;
 }
 
@@ -216,70 +253,11 @@ input[type=submit]:hover {
     top: 13vw;
     padding: 20px;
 }
-
-form {
-    background-color: rgb(177, 205, 214);
-}
-
-
-/* grid 4 */
-
-table {
-    width: 100%;
-    text-align: center;
-    table-layout: fixed;
-}
-
-.tbl-header{
-    background-color: rgba(185, 185, 185, 0.274);
-    margin-left: 15vw;
-    margin-right: 15vw;
-    text-align: center;
-   }
-  .tbl-content{
-    height:300px;
-    overflow-x:auto;
-    margin-top: 0px;
-    border: 1px solid rgba(255, 255, 255, 0.678);
-    text-align: center;
-  }
-
-.location {
-    height:15px;
-    width:10px;
-}
-
-th{
-    padding: 20px 15px;
-    text-align: left;
-    font-weight: 600;
-    font-size: 100%;
-    color: rgb(128, 25, 25);
-    text-transform: uppercase;
-    font-weight: bold;
-  }
-  td{
-    padding: 15px;
-    text-align: left;
-    vertical-align:middle;
-    font-weight: 400;
-    font-weight: bold;
-    font-size: 12px;
-    color: rgb(182, 99, 22);
-    border-bottom: solid 1px rgba(216, 216, 216, 0.596);
-  }
-
-tr:hover {
-    background-color: rgba(102, 185, 211, 0.432);
-    color: white;
-    cursor: pointer;
-}
-
-
 /* dropdown */
 
 .dropdown {
     position: relative;
+    /* display: inline-block; */
   }
   
   .dropdown-content {
@@ -312,4 +290,90 @@ tr:hover {
     width: 5vw;
     height: 5vw;
     border-radius: 50%;
+  }
+
+  /* chat */
+
+  h2{
+    font: 35px/1 Lobster,Arial,sans-serif;
+    text-align: center;
+  }
+
+  .containerMessage {
+    border: 2px solid #dedede;
+    background-color: #f1f1f1;
+    border-radius: 5px;
+    padding: 10px;
+    margin: 10px 0;
+  }
+  
+  .darker {
+    border-color: #ccc;
+    background-color: #ddd;
+  }
+  
+  .containerMessage::after {
+    content: "";
+    clear: both;
+    display: table;
+  }
+  
+  .containerMessage img {
+    float: left;
+    max-width: 60px;
+    width: 100%;
+    margin-right: 20px;
+    border-radius: 50%;
+  }
+  
+  .containerMessage img.right {
+    float: right;
+    margin-left: 20px;
+    margin-right:0;
+  }
+  
+  .time-right {
+    float: right;
+    color: #aaa;
+  }
+  
+  .time-left {
+    float: left;
+    color: #999;
+  }
+
+  .item5{
+      padding-left: 20%;
+      padding-right: 20%;
+  }
+  
+  /* Full-width textarea */
+  .form-container textarea {
+    width: 100%;
+    padding: 15px;
+    margin: 5px 0 22px 0;
+    border: none;
+    background: #f1f1f1;
+    resize: none;
+    min-height: 80px;
+  }
+  
+  /* When the textarea gets focus, do something */
+  .form-container textarea:focus {
+    background-color: #ddd;
+    outline: none;
+  }
+  
+  /* Set a style for the submit/send button */
+  .form-container .btn {
+    background: lightgray;
+    color: rgb(82, 81, 81);
+    font: 25px/1 Lobster,Arial,sans-serif;
+    padding: 16px 20px;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    margin-bottom:10px;
+    opacity: 0.8;
+    border-radius: 10px;
   }

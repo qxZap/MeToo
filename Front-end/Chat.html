@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <link rel="icon" href="assets/icon.png">    
+        <link rel="stylesheet" type="text/css" href="Chat.css">
+        <link rel="stylesheet" type="text/css" href="comun.css">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta charset="UTF-8">
+        <title>MeToo</title>
+        <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Lobster" />
+    </head>
+    <body href = "#">
+        <div class="grid-container">
+            <div class="item1">
+                <nav>
+                        <ul class="fancyNav">
+                            <!-- <li id="home"><a href="#home" class="homeIcon">Home</a></li> -->
+                            <li id="browseTab"><a onclick="loadRooms()" href="#browse">Browse</a></li>
+                            <li id="yourRoomsTab"><a onclick="getMyRooms()" href="#yourrooms">Your Rooms</a></li>
+                            <li id="localTab"><a href="#youip">Local</a></li>
+                            <li id="newRoomTab"><a href="NewRoom.html">Create Room</a></li>
+                            <li id="aboutTab"><a href="#about">About</a></li>
+                            <!-- <li id="empty"><a>..............................................................................</a></li> -->
+                        </ul>
+                </nav>
+                <br>
+                <input type="text" class="search" name="search" placeholder="Search..">
+            </div>
+
+            <div class="item3"><img class="imag" alt="SmileyFace" src="assets/logoMeToo.jpg">  
+                <div class="dropdown">
+                        <img src="assets/UserPhoto.png" alt="SmileyFace"> 
+                        <!-- class="profile-circle"/> -->
+                        <div class="dropdown-content">
+                        <a href="#">Dashboard</a>
+                        <a href="#">Profile</a>
+                        <a href="#">Settings</a>
+                         <!-- <a onclick="logOut()" href="#">Sign Out</a> -->
+                        </div>
+                </div>
+                <br>
+            </div>  
+
+            <div class="item5">
+                    <h2>Chat Messages</h2>
+            <div class="containerMessage">
+                    <img src="assets/userPhoto.png" alt="Avatar" style="width:100%;">
+                    <p>Hello. How are you today?</p>
+                    <span class="time-right">11:00</span>
+                  </div>
+                  
+                  <div class="containerMessage darker">
+                    <img src="assets/userPhoto.png" alt="Avatar" class="right" style="width:100%;">
+                    <p>Hey! I'm fine. Thanks for asking!</p>
+                    <span class="time-left">11:01</span>
+                  </div>
+                  
+                  <div class="containerMessage">
+                    <img src="assets/userPhoto.png" alt="Avatar" style="width:100%;">
+                    <p>Sweet! So, what do you wanna do today?</p>
+                    <span class="time-right">11:02</span>
+                  </div>
+                  
+                  <div class="containerMessage darker">
+                    <img src="assets/userPhoto.png" alt="Avatar" class="right" style="width:100%;">
+                    <p>Nah, I dunno. Play soccer.. or learn more coding perhaps?</p>
+                    <span class="time-left">11:05</span>
+                  </div>
+
+                  <div id="myForm">
+                        <form action="/action_page.php" class="form-container">
+                          <textarea placeholder="Type message.." name="msg" required></textarea>
+                      
+                          <button type="submit" class="btn">Send</button>
+                        </form>
+                    </div>
+
+                </div>
+                <div class="item6">
+
+                </div>
+        </div>
+        
+    </body>
+</html>

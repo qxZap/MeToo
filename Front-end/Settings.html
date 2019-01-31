@@ -2,50 +2,34 @@
 <html lang="en">
     <head>
         <link rel="icon" href="assets/icon.png">    
-        <link rel="stylesheet" type="text/css" href="Dashboard.css">
+        <link rel="stylesheet" type="text/css" href="MyProfile.css">
+        <link rel="stylesheet" type="text/css" href="comun.css">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Lobster" />
         <meta charset="UTF-8">
         <title>MeToo</title> 
     </head>
-    <body class="bgGradient">
-        
-      <div class="logoSearch">
-        <!--dropdown menu-->
-          <div class="dropdown">
-              <a href="#" class="account" >
-              <img id="profilePicture" src="assets/UserPhoto.png" alt="Smiley face" class="profile-circle"/>
-              </a>
-              <div class="submenu">
-              <ul class="root">
-              <li >
-              <a href="Dashboard.html" >Dashboard</a>
-              </li>
-              <li >
-              <a href="MyProfile.html" >Profile</a>
-              </li>
-              <li >
-              <a href="Settings.html">Settings</a>
-              </li>
-              <li>
-              <a href="SingOut.html">Sign Out</a>
-              </li>
-              </ul>
-              </div>
-              </div>
-
-      <img class="imag" alt="Smiley face" src="assets/logo.png">   
+    <body>
+        <div class="dropdown">
+            <img id="profilePicture" src="assets/UserPhoto.png" alt="SmileyFace"> 
+            <!-- class="profile-circle"/> -->
+            <div class="dropdown-content">
+            <a href="Dashboard.html">Dashboard</a>
+            <a  href="MyProfile.html">Profile</a>
+            <a href="#">Settings</a>
+             <a onclick="logOut()" href="#">Sign Out</a>
+            </div>
+    </div>
+      <img class="imag" alt="Smiley face" src="assets/logoMeToo.jpg">   
       </div>
       
         <h1 style="text-align:center"> Settings </h1>
-        
-      
-
-        
-        
-
-
 <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
 <script src="js/usermenu.js"></script>
+<script src="js/utils.js"></script>
+<script src="js/myprofile.js"></script>
+
+
 
 
     </body>

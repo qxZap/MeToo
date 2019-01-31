@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <link rel="icon" href="assets/icon.png">    
+        <link rel="stylesheet" type="text/css" href="RoomDescription.css">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta charset="UTF-8">
+        <title>MeToo</title>
+        <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Lobster" />
+    </head>
+    <body href = "#">
+        <div class="grid-container">
+            <div class="item1">
+                <nav>
+                        <ul class="fancyNav">
+                            <li id="browseTab"><a  href="Dashboard.html">Browse</a></li>
+                            <li id="yourRoomsTab"><a  href="Dashboard.html">Your Rooms</a></li>
+                            <li id="localTab"><a href="#youip">Local</a></li>
+                            <li id="newRoomTab"><a href="NewRoom.html">Create Room</a></li>
+                            <li id="aboutTab"><a href="#about">About</a></li>
+                        </ul>
+                </nav>
+                <input id="search" type="text" class="search" name="search" placeholder="Search..">
+            </div>
+
+            <div class="item3"><img class="imag" alt="SmileyFace" src="assets/logoMeToo.jpg">  
+                <div class="dropdown">
+                        <img id="profilePicture" src="assets/UserPhoto.png" alt="SmileyFace"> 
+                        <!-- class="profile-circle"/> -->
+                        <div class="dropdown-content">
+                        <a href="Dashboard.html">Dashboard</a>
+                        <a  href="MyProfile.html">Profile</a>
+                        <a href="#">Settings</a>
+                         <a onclick="logOut()" href="#">Sign Out</a>
+                        </div>
+                </div>
+            </div>
+                    <div class="container">
+                    <h1 id="roomName">TITLU</h1>
+                    <div class="contineHarta">
+                    <p id="description" class="descriere">texteswrdgtfhvbjmnhgftre43w4rtdfghyftre4w3er4dtfghyjbftdreswq2wea3srzdtfghy bftrdew3ersdtfgh </p>
+                        
+                        <div class="harta"  id="map" style="width:60%;height:400px;"></div>
+                    </div>
+                    <div id="lobby" class="cuPhoto">
+                    <p id="lobby_size" class="altaDescriere">Lobby: 2/5</p>
+                    <img class="photo" src="assets/UserPhoto.png" alt="SmileyFace"> 
+                    <img class="photo" src="assets/UserPhoto.png" alt="SmileyFace"> 
+                    <p class="altaDescriere" style="padding-left: 2%">Link: </p>
+                    <a class="altaDescriere" href="http://www.wikipedia.org" style="padding-top: 2.5%;">Lorem Ipsum</a>
+                    </div>
+                    <br>
+                    <div class= "buton">
+                    <button id="actionButton"  onclick="action()" type="button" >Join!</button>
+
+                    </div>
+                    </div>
+                <div class="item6">
+
+                </div>
+        </div>
+    </body>
+    
+            
+            
+            
+            <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCmAPirfLXmN9as4r7XZJ_wbQwwrn9dICw&callback=initMap" async defer></script> 
+            <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+            <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/push.js/1.0.5/push.js"></script>
+            <script src="js/roomDescription.js"></script>
+            <script src="js/usermenu.js"></script>
+            <script src="js/utils.js"></script>
+            
+
+    </html>

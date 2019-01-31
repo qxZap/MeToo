@@ -58,7 +58,16 @@ usersDB = mysql.connector.connect(
   autocommit=True
 )
 
-def reconnectDB(access=False,users=False,rooms=False,activation=False,checkAccess=False):
+locationsDB = mysql.connector.connect(
+  host="localhost",
+  user="cliwapp",
+  passwd="elburaga",
+  database="cliwapp",
+  autocommit=True
+)
+
+
+def reconnectDB(access=False,users=False,rooms=False,activation=False,checkAccess=False,locations=False):
     global accessDB,usersDB,roomsDB,activationDB,checkAccessDB
     if access:
         accessDB = mysql.connector.connect(
@@ -100,7 +109,14 @@ def reconnectDB(access=False,users=False,rooms=False,activation=False,checkAcces
           database="cliwapp",
           autocommit=True
         )
-
+    if locations:
+        locationsDB = mysql.connector.connect(
+        host="localhost",
+        user="cliwapp",
+        passwd="elburaga",
+        database="cliwapp",
+        autocommit=True
+        )
 
 
 mail = smtplib.SMTP('smtp.gmail.com',587)
@@ -110,15 +126,16 @@ mail.login("cliwapp@gmail.com","elburaga")
 
 
 def hasAccess(accessToken):
-    global accessDB
-    reconnectDB(access=True)
+    global checkAccessDB
+    reconnectDB(checkAccess=True)
     if accessToken==None:
         return False
     sql = "SELECT username FROM access WHERE accessToken='"+accessToken+"'"
     mycursor = checkAccessDB.cursor(buffered=True)
     mycursor.execute(sql)
     fetched = mycursor.fetchall()
-    print(fetched)
+    if fetched==None:
+        return False
     if len(fetched)==0:
         return False
     else:
@@ -131,6 +148,7 @@ def activate(username):
     mycursor.execute(sql)
     sql = "UPDATE users SET activated=1 WHERE username='"+username+"'"
     mycursor = usersDB.cursor(buffered=True)
+
     mycursor.execute(sql)
     activationDB.commit()
     usersDB.commit()
@@ -177,8 +195,8 @@ def addToActivation(username):
     return activationToken
 
 def register(username,password,email,date,country):
-    sql = 'INSERT INTO users (username,password,email,date,country,activated) VALUES (%s,%s,%s,%s,%s,%s)'
-    val = (username,password,email,date,country,0)
+    sql = 'INSERT INTO users (username,password,email,date,country,activated,profilePicture) VALUES (%s,%s,%s,%s,%s,%s,%s)'
+    val = (username,password,email,date,country,0,'def.png')
     mycursor = usersDB.cursor(buffered=True)
     mycursor.execute(sql,val)
     usersDB.commit()
@@ -198,33 +216,103 @@ def newAccessToken(username):
     
 
 def login(username,password):
-    sql = "SELECT password,activated from users where username='"+username+"'"
+    sql = "SELECT password,activated,profilePicture from users where username='"+username+"'"
     mycursor = usersDB.cursor(buffered=True)
     mycursor.execute(sql)
     fetched = mycursor.fetchall()
     newToken = newAccessToken(username)
-    print(fetched)
     if len(fetched)<1:
-        return 2,0
+        return 2,0,0
     if fetched[0][1]==0:
-        return 3,0
+        return 3,0,0
     if len(fetched)==0:
-        return 1,0
+        return 1,0,0
     if fetched[0][0] == password:
-        return True,newToken
+        return True,newToken,fetched[0][2]
 
-    return 2,0
+    return 2,0,0
+
+@app.route('/wtf', methods = ['GET'])
+@cross_origin(origin="*")
+def wtf():
+    return '''
+    <!DOCTYPE html>
+
+<html>
+
+<head>
+<title>Hello!</title>
+<script>
+function notify(){
+
+if (Notification.permission !== "granted") {
+Notification.requestPermission();
+}
+ else{
+var notification = new Notification('hello', {
+  body: "Hey there!",
+});
+notification.onclick = function () {
+  window.open("http://google.com");
+};
+}
+}
+</script>
+</head>
+
+<body>
+<button onclick="notify()">Notify</button>
+</body>
+</html>
+''',200
+
+@app.route('/iamhere',methods = ['POST'])
+@cross_origin(origin="*")
+def setLocation():
+    content = request.get_json()
+    hasAcc = hasAccess(content['accessToken'])
+    if hasAcc:
+        sql = "DELETE FROM locations WHERE username='"+hasAcc+"'"
+        mycursor = locationsDB.cursor(buffered=True)
+        mycursor.execute(sql)
+        usersDB.commit()
+
+        sql = 'INSERT INTO locations (username,lat,lon) VALUES (%s,%s,%s)'
+        #sql = 'UPDATE locations SET lat=(%s) , lon=(%s) where username=(%s)'
+        val = (hasAcc,content['lat'],content['lon'])
+        mycursor = locationsDB.cursor(buffered=True)
+        mycursor.execute(sql,val)
+        usersDB.commit()
+        return jsonify(status=True),200
+    return jsonify(status=False),404
+
+
+@app.route('/rooms/delete/<string:roomID>/<string:accessToken>',methods=['DELETE'])
+@cross_origin(origin="*") 
+def deleteRoom(roomID,accessToken):
+    hasAcc = hasAccess(accessToken)
+    if hasAcc:
+        sql="DELETE FROM rooms WHERE roomID='"+roomID+"' and owner='"+hasAcc+"'" 
+        mycursor = roomsDB.cursor(buffered=True)
+        mycursor.execute(sql)   
+        return jsonify(wtf="wtf"),200
+    else:
+        return jsonify(rooms=[]),404
+
 
 
 @app.route('/login', methods = ['POST'])
 @cross_origin(origin="*")
 def loginAPIPath():
     content = request.get_json()
-    status,accessToken = login(content['username'],content['password'])
+    status,accessToken,profilePicture = login(content['username'],content['password'])
+    if profilePicture==0:
+        profilePicture="def.png"
     if status==1:
         return jsonify(
                 status=status,
-                accessToken=accessToken
+                accessToken=accessToken,
+                profilePicture=profilePicture
           ),211
     elif status==2:
         return jsonify(
@@ -364,12 +452,34 @@ def getRoomsInRange(range,lat,lon):
             toReturn.append(room)
     return jsonify(rooms=toReturn),200
 
-@app.route('/rooms/get/<string:roomID>',methods=['GET'])
+@app.route('/rooms/get/<string:roomID>/<string:accessToken>',methods=['GET'])
 @cross_origin(origin="*") 
-def getRoom(roomID):
-    global roomsDB
-    reconnectDB(rooms=True)
-    sql = "SELECT * FROM rooms where roomID='"+roomID+"'"
+def getRoom(roomID,accessToken):
+    global roomsDB,accessDB
+    reconnectDB(rooms=True,access=True)
+    hasAcc = hasAccess(accessToken)
+    if hasAcc:
+        sql = "SELECT * FROM rooms where roomID='"+roomID+"'"
+        mycursor = roomsDB.cursor(buffered=True)
+        mycursor.execute(sql)
+        fetched = mycursor.fetchall()
+        i=fetched[0]
+        room = {
+                  "roomID":i[0].decode("UTF-8"),
+                  "owner":i[1].decode("UTF-8"),
+                  "roomName":i[2].decode("UTF-8"),
+                  "lobbySize":i[3],
+                  "description":i[4].decode("UTF-8"),
+                  "location":i[5].decode("UTF-8"),
+                  "lobby":(i[6].decode("UTF-8")).split(','),
+                  "tags":(i[7].decode("UTF-8")).split(','),
+                  "title":i[8].decode("UTF-8"),
+                  "link":i[9].decode("UTF-8")
+            }
+        return jsonify(room=room),200
+
+    else:
+        return jsonify(rooms=[]),401
 
 
 @app.route('/rooms/search/<float:range>/<float:lat>/<float:lon>',methods=['POST'])
@@ -436,7 +546,11 @@ def upload_file(username,accessToken):
         file = request.files['image']
         newFileName=username+'.'+file.filename.split('.')[1]
         file.save(os.path.join(app.config['UPLOAD_FOLDER'], newFileName))
-        return jsonify(status=True,path=newFileName,link='http://127.0.0.1:8000/'+newFileName,code=200),200
+        sql = "UPDATE users SET profilePicture='"+newFileName+"' where username='"+username+"'"
+        mycursor = roomsDB.cursor(buffered=True)
+        mycursor.execute(sql)
+
+        return jsonify(status=True,path=newFileName,link=newFileName,code=200),200
     else:
         return jsonify(status=False,code=401
           ),401
@@ -448,9 +562,6 @@ def changePassword(who,password,newPassword):
     mycursor = roomsDB.cursor(buffered=True)
     mycursor.execute(sql)
     return 0
-
-
-
 
 
 @app.route('/profile/change/password',methods=['POST'])
@@ -474,13 +585,32 @@ def changePasswordAPI():
         return jsonify(status=result),200
 
 
-@app.route('/profile/picture/<string:username>/<string:accessToken>',methods=['GET'])
+@app.route('/profile/picture/<string:username>',methods=['GET'])
 @cross_origin(origin="*")
-def getProfilePicture(username,accessToken):
+def getProfilePicture(username,):
     global accessDB,usersDB
     reconnectDB(access=True,users=True)
+    
+    sql = "SELECT profilePicture FROM users WHERE username='"+username+"'"
+    mycursor = roomsDB.cursor(buffered=True)
+    mycursor.execute(sql)
+    fetched = mycursor.fetchall()
+    print(fetched[0][0])
+    if len(fetched)==0:
+        return jsonify(status=True,url='assets/UserPhoto.png'),200
+    else:
+        return jsonify(status=True,url='http://127.0.0.1:8000/'+fetched[0][0]),200
+
+
+
+@app.route('/profile/pictures/<string:accessToken>',methods=['POST'])
+@cross_origin(origin="*")
+def getProfilePictures(accessToken):
+    global accessDB,usersDB
+    reconnectDB(access=True,users=True)
+    content = request.get_json()
     hasAcc = hasAccess(accessToken)
-    if hasAcc==username:
+    if hasAcc:
         sql = "SELECT profilePicture FROM users WHERE username='"+username+"'"
         mycursor = roomsDB.cursor(buffered=True)
         mycursor.execute(sql)
@@ -496,10 +626,108 @@ def getProfilePicture(username,accessToken):
     return jsonify(status=False,url='Error'),404
 
 
+@app.route('/rooms/join',methods=['POST'])
+@cross_origin(origin="*")
+def joinRoom():
+    global roomsDB
+    reconnectDB(rooms=True)
+    content = request.get_json()
+    accessToken = content['accessToken']
+    hasAcc = hasAccess(accessToken)
+    if hasAcc:
+        roomID = content['roomID']
+        sql = "SELECT * FROM rooms WHERE roomID='"+roomID+"'"
+        mycursor = roomsDB.cursor(buffered=True)
+        mycursor.execute(sql)
+        fetched = mycursor.fetchall()[0]
+        lobbySize = fetched[3]
+        lobby = (fetched[6].decode("UTF-8")).split(',')
+        if hasAcc in lobby:
+            return jsonify(status=False,text="Aldready in the room"),409
+        if len(lobby)<lobbySize:   
+            lobby.append(hasAcc)
+            newLobby =  ",".join(map(str,lobby))
+            sql = "UPDATE rooms SET lobby=(%s) WHERE roomID=(%s)"
+            val = (newLobby,roomID)
+            mycursor = roomsDB.cursor(buffered=True)
+            mycursor.execute(sql,val)
+            return jsonify(status=True,text="Joined sucessfuly"),200
+        else:
+            return jsonify(status=True,text="Room full aldready"),409
+    return "wtf?",200
+
+@app.route('/rooms/leave',methods=['POST'])
+@cross_origin(origin="*")
+def leaveRoom():
+    global roomsDB
+    reconnectDB(rooms=True)
+    content = request.get_json()
+    accessToken = content['accessToken']
+    hasAcc = hasAccess(accessToken)
+    if hasAcc:
+        roomID = content['roomID']
+        sql = "SELECT * FROM rooms WHERE roomID='"+roomID+"' and owner!='"+hasAcc+"'"
+        mycursor = roomsDB.cursor(buffered=True)
+        mycursor.execute(sql)
+        fetched = mycursor.fetchall()[0]
+        lobbySize = fetched[3]
+        lobby = (fetched[6].decode("UTF-8")).split(',')
+        if hasAcc not in lobby:
+            return jsonify(status=False,text="Not in the room"),401
+        lobby.remove(hasAcc)
+        newLobby =  ",".join(map(str,lobby))
+        sql = "UPDATE rooms SET lobby=(%s) WHERE roomID=(%s)"
+        val = (newLobby,roomID)
+        mycursor = roomsDB.cursor(buffered=True)
+        mycursor.execute(sql,val)
+        return jsonify(status=True,text="Left sucessfuly"),200
+    else:
+        return jsonify(status=False,text="Not Found"),404
+    return "wtf?",200
+
+
+
+'''
+ sql = "SELECT * FROM rooms"
+        mycursor = roomsDB.cursor(buffered=True)
+        mycursor.execute(sql)
+        fetched = mycursor.fetchall()
+        toReturn = []
+        for i in fetched:
+            newGeoLocation = (i[5].decode("UTF-8")).split(' ')
+            lat2 = float(newGeoLocation[0].decode("UTF-8"))
+            lon2 = float(newGeoLocation[1].decode("UTF-8"))
+            if distanceBetween2Points(lat,lon,lat2,lon2)<range and (i[7].decode("UTF-8")).split(',')!=[u'']:
+                counter = 0
+                for j in content['tags']:
+                    if j in (i[7].decode("UTF-8")).split(','):
+                        counter+=1
+                if counter>0:
+                    room = {
+                      "roomID":i[0].decode("UTF-8"),
+                      "owner":i[1].decode("UTF-8"),
+                      "roomName":i[2].decode("UTF-8"),
+                      "lobbySize":i[3], 
+                      "description":i[4].decode("UTF-8"),
+                      "location":i[5].decode("UTF-8"),
+                      "lobby":(i[6].decode("UTF-8")).split(','),
+                      "tags":(i[7].decode("UTF-8")).split(','),
+                      "title":i[8].decode("UTF-8"),
+                      "link":i[9].decode("UTF-8"),
+                      "counter":counter
+                    }    
+                    toReturn.append(room)
+        toReturn = sorted(toReturn,key=lambda x:x['counter'], reverse=True)
+        print(toReturn)
+        return jsonify(rooms=toReturn),200
+
+'''
 
 @app.route('/new_room',methods=['POST'])
 @cross_origin(origin="*")
 def newRoomAPIPath():
+    global roomsDB
+    reconnectDB(rooms=True)
     content = request.get_json()
     if 'owner' not in content:
         content['owner']=hasAccess(content['accessToken'])

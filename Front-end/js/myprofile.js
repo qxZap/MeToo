@@ -1,5 +1,6 @@
 var newPassowordCheck = false;
 var newPicture = null;
+var pictureTooBig = false;
 document.getElementById('changePasswordForm').addEventListener('keypress', function(event) {
         if (event.keyCode == 13) {
             event.preventDefault();
@@ -30,7 +31,8 @@ window.addEventListener('load', function() {
           var formData = new FormData();
           formData.append('image',document.getElementById('picture').files[0]);
           if(document.getElementById('picture').files[0].size/1000>2000)
-          	alert("File bigger than 2MB. NextFeature?");
+          	pictureTooBig = true;
+          	
           newPicture = formData;		
       }
   });
@@ -43,20 +45,22 @@ function imageIsLoaded(e) {
 function changePicture(){
 	
 
-	console.log('vr sa trimit',newPicture);
-
-	$.ajax({
-    url: 'http://127.0.0.1:8090/upload/'+localStorage.getItem("username")+'/'+localStorage.getItem("MeTooAccessToken"),
-    data: newPicture,
-    type: 'POST',
-    contentType: false, 
-    processData: false, 
-    success: function(data) {
-      localStorage.setItem("profilePictureLink",data['link']);
-      location.reload();
-    }
-    
-	});
+	if(!pictureTooBig){
+		$.ajax({
+	    url: 'http://127.0.0.1:8090/upload/'+localStorage.getItem("username")+'/'+localStorage.getItem("MeTooAccessToken"),
+	    data: newPicture,
+	    type: 'POST',
+	    contentType: false, 
+	    processData: false, 
+	    success: function(data) {
+	      localStorage.setItem("profilePictureLink",data['link']);
+	      location.reload();
+	    }
+	    });
+	  }
+	else{
+		alert("File bigger than 2MB. Please use smaller picture");
+	}
 
 }
 /*
